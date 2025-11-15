@@ -64,18 +64,19 @@ for row in new_grid:
 # Attack Mechanism - The game must take input from the player as a guess to where to attack the opponent. The input is in the
 # form of a coordinatoes for a cell, which is the the number of the row and column separated by columns in parentheses. The
 # function returns a string indicating whether the player hit a ship or not.
-# ○ Inputs: player position and opposition coordinates ( both tuples )
-# ○ Outputs: would be a string value of either attack, sink, or miss
+# ○ Inputs: desired coordinates for attack
+# ○ Outputs: would be a string value of either attack or miss
 
 def attack(grid):
-
-    attack_coordinates = input("Enter attack coordinates, with row and col separated by a space: ")
 
     try:
         row = int(input(Enter the row you want to attack: ))
         col = int(input(Enter the column you want to attack: ))
     except ValueError:
-        return "Invalid input"
+        return "Invalid input."
+    
+    if row < 0 or row >= len(grid) or col < 0 or col <= len(grid): # checks if coords are in range of grid
+        return "Coordinates out of range."
 
     cell = grid[row][col]
 
