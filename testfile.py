@@ -62,10 +62,16 @@ for row in new_grid:
 # Paulina's function - attack mechanism
 
 # Attack Mechanism - The game must take input from the player as a guess to where to attack the opponent. The input is in the
-# form of a coordinatoes for a cell, which is the the number of the row and column separated by columns in parentheses. The
-# function returns a string indicating whether the player hit a ship or not.
+# form of a coordinatoes for a cell, which is the the number of the row and column as two integers. The
+# function returns a string indicating whether the player hit a ship or not and then marks the cell as being attacked already.
 # ○ Inputs: desired coordinates for attack
 # ○ Outputs: would be a string value of either attack or miss
+
+fake_grid = [
+    [0, 0, 1]
+    [0, 1, 0]
+    [1, 0, 0]
+]
 
 def attack(grid):
 
@@ -75,19 +81,24 @@ def attack(grid):
     except ValueError:
         return "Invalid input."
     
-    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]): # checks if coords are in range of grid
+    valid_row = 0 <= row < len(grid)
+    valid_col = 0 <= col < len(grid[0])
+
+    if not (valid_row and valid_col):
         return "Coordinates out of range."
 
     cell = grid[row][col]
+    previous_attack = (cell == 2) or (cell == -1)
 
-    if cell == 2 or cell == -1:
-        return "This position has already been attacked!" # prevents duplicate attacks
+    if previous_attack:
+        return "This position has already been attacked!" # prevents duplicate attacks    
     
-    if cell == 1:
+    ship = (cell == 1)
+    
+    if ship:
         grid[row][col] = 2
         return "Hit!" # this marks the attack as a hit
-    
-    if cell == 0:
+    else:
         grid[row][col] = -1
         return "Miss!" # marks as a miss
     
