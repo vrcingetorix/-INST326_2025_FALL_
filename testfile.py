@@ -71,6 +71,12 @@ def attack(grid):
 
     attack_coordinates = input("Enter attack coordinates, with row and col separated by a space: ")
 
+    try:
+        row = int(input(Enter the row you want to attack: ))
+        col = int(input(Enter the column you want to attack: ))
+    except ValueError:
+        return "Invalid input"
+
     cell = grid[row][col]
 
     if cell == 2 or cell == -1:
@@ -84,4 +90,5 @@ def attack(grid):
         grid[row][col] = -1
         return "Miss!" # marks as a miss
     
+
     
