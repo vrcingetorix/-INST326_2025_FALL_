@@ -74,7 +74,6 @@ fake_grid = [
 ]
 
 def attack(grid):
-
     try:
         row = int(input("Enter the row you want to attack: "))
         col = int(input("Enter the column you want to attack: "))
@@ -85,7 +84,7 @@ def attack(grid):
     valid_col = 0 <= col < len(grid[0])
 
     if not (valid_row and valid_col):
-        return "Coordinates out of range."
+        return "Coordinates out of range." # checks bounds
 
     cell = grid[row][col]
     previous_attack = (cell == 2) or (cell == -1)
