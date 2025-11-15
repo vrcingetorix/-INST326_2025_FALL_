@@ -70,12 +70,12 @@ for row in new_grid:
 def attack(grid):
 
     try:
-        row = int(input(Enter the row you want to attack: ))
-        col = int(input(Enter the column you want to attack: ))
+        row = int(input("Enter the row you want to attack: "))
+        col = int(input("Enter the column you want to attack: "))
     except ValueError:
         return "Invalid input."
     
-    if row < 0 or row >= len(grid) or col < 0 or col <= len(grid): # checks if coords are in range of grid
+    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]): # checks if coords are in range of grid
         return "Coordinates out of range."
 
     cell = grid[row][col]
