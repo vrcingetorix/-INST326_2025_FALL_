@@ -98,24 +98,25 @@ def command_points(action, points):
     return points_updated
     
 #Lauren 
-def Scanning(grid,row, col,attack, range):
+def Scanning(grid,row, col,attack, ran):
     """A scanning algorithm will be used to help provide information on ship locations.
       The algorithm will be able to check its position nearby and predict if ships 
       are located around. The function will scan the coordinate of its position and opposing ships.
         It will try to check for ships within a specific range and return a value based on 
         if the ship is close by or not. 
 Inputs: scanning of position and the enemy ship coordinates ( both tuples ) 
-Output: would be a boolean value to decide whether or not the ship is actually in proximity 
+Output: would be a boolean value to decide whether or not the ship is actually in proximity  
+ran=range
 """ 
     if attack ==grid[row][col]:
         return True 
-    elif grid[row+range][col] == 1:
+    elif grid[row+ran][col] == 1:
         return True
-    elif grid[row-range][col]== 1: 
+    elif grid[row-ran][col]== 1: 
         return True
-    elif grid[row][col+range] == 1:
+    elif grid[row][col+ran] == 1:
         return True 
-    elif grid[row][col-range] == 1:
+    elif grid[row][col-ran] == 1:
         return True
     else: 
         return False
