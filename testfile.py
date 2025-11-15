@@ -74,3 +74,14 @@ def attack(grid):
     cell = grid[row][col]
 
     if cell == 2 or cell == -1:
+        return "This position has already been attacked!" # prevents duplicate attacks
+    
+    if cell == 1:
+        grid[row][col] = 2
+        return "Hit!" # this marks the attack as a hit
+    
+    if cell == 0:
+        grid[row][col] = -1
+        return "Miss!" # marks as a miss
+    
+    
