@@ -100,8 +100,11 @@ def command_points(action, points):
         points (int): current command point total
         
     Returns:
-        
+        points_updated (int): updated command point total
     """
+    for correct in cost_of_action.keys():
+        if action.lower() == correct:
+            break
     lower = action.lower()
     costs = cost_of_action.get(lower, 0)
     points_updated = max(0, points - costs)
@@ -118,7 +121,7 @@ Inputs: scanning of position and the enemy ship coordinates ( both tuples )
 Output: would be a boolean value to decide whether or not the ship is actually in proximity  
 ran=range
 """ 
-    if attack ==grid[row][col]:
+    if attack == grid[row][col]:
         return True 
     elif grid[row+ran][col] == 1:
         return True
