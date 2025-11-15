@@ -92,6 +92,16 @@ cost_of_action =  {
     "scan": 2
 }
 def command_points(action, points):
+    """
+    Used to update the command point total according to the user's action
+    
+    Parameters: 
+        action (str): chosen action selected by user
+        points (int): current command point total
+        
+    Returns:
+        
+    """
     lower = action.lower()
     costs = cost_of_action.get(lower, 0)
     points_updated = max(0, points - costs)
