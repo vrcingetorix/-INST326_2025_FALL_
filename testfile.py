@@ -1,17 +1,3 @@
-#testing 123 
-# testinggg 
-
-<<<<<<< HEAD
-# paulina testing
-=======
-#Sahith's update
-
-#Lauren Pierre-Louis made a change
-<<<<<<< HEAD
->>>>>>> 412d064df4b7670b7c3bdad06e3d9517c388aaba
-=======
-
-
 
 #Sahith's code (Ship Location)
 
@@ -53,7 +39,6 @@ for row in new_grid:
 
 #Testing Function
 
->>>>>>> 9118361facd72c63173d876c17ff2e868e53dcd3
 
 # Paulina's function - attack mechanism
 
@@ -64,8 +49,8 @@ for row in new_grid:
 # ○ Outputs: would be a string value of either attack or miss
 
 grid = [
-    [0, 0, 1]
-    [0, 1, 0]
+    [0, 0, 1],
+    [0, 1, 0],
     [1, 0, 0]
 ]
 
