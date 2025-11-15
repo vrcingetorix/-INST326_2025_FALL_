@@ -6,10 +6,6 @@
 =======
 #Sahith's update
 
-
-#Michael was here 
-
-
 #Lauren Pierre-Louis made a change
 <<<<<<< HEAD
 >>>>>>> 412d064df4b7670b7c3bdad06e3d9517c388aaba
@@ -101,5 +97,18 @@ def attack(grid):
         grid[row][col] = -1
         return "Miss!" # marks as a miss
     
+#Michael's Command Points System
 
+cost_of_action =  {
+    "attack": 3,
+    "defend": 2,
+    "move": 1,
+    "special_attack": 5,
+    "scan": 2
+}
+def command_points(action, points):
+    lower = action.lower()
+    costs = cost_of_action.get(lower, 0)
+    points_updated = max(0, points - costs)
+    return points_updated
     
