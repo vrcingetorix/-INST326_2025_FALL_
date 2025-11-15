@@ -67,7 +67,7 @@ for row in new_grid:
 # ○ Inputs: desired coordinates for attack
 # ○ Outputs: would be a string value of either attack or miss
 
-fake_grid = [
+grid = [
     [0, 0, 1]
     [0, 1, 0]
     [1, 0, 0]
