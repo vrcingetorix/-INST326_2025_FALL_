@@ -5,15 +5,15 @@ class Ship:
         self.positions = set(positions)
         self.hits = set()
     
-    def __repr__(self):
-        return f"{self.name} is at {self.position}"
-    
     def record_hit(self, coord=0):
         if coord == self.position:
             self.hits.add(coord)
 
     def sunkeness(self):
         return self.hits == self.positions
+    
+    def __repr__(self):
+        return f"{self.name} is at {self.positions}"
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 class Player:
