@@ -6,7 +6,7 @@ class Ship:
         self.hits = set()
     
     def __repr__(self):
-        return f"{ship.name} is at {self.position}"
+        return f"{self.name} is at {self.position}"
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 class Player:
