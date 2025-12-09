@@ -16,7 +16,7 @@ class Ship:
     def __repr__(self):
         return f"{self.name} is at {self.positions}"
     
-    def place_ships(grid, ship_size):
+    def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
         size = len(grid)
         placed = False
 
@@ -25,11 +25,13 @@ class Ship:
             if direction == 'horizontal':
                 row = random.randomint(0, size-1)
                 col = random.randomint(0, ship_size-1)
+                positions = [(row, col+i) for i in range(ship_size)]
             else:
                 
 
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
+
 class Player:
     def __init__(self, name):
         self.name = name
