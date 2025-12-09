@@ -22,7 +22,11 @@ class Ship:
 
         while not placed:
             direction = random.choice(['horizontal', 'vertical'])
-            
+            if direction == 'horizontal':
+                row = random.randomint(0, size-1)
+                col = random.randomint(0, ship_size-1)
+            else:
+                
 
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
