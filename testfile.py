@@ -1,9 +1,10 @@
 # ship class - paulina
 class Ship:
-    def __init__(self, coordinates):
-        self.coordinates = coordinates
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
         self.hits = set()
-        
+
 
 
 #Sahith's code (Ship Location)
