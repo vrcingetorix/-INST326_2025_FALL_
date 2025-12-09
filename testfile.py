@@ -27,7 +27,9 @@ class Ship:
                 col = random.randomint(0, ship_size-1)
                 positions = [(row, col+i) for i in range(ship_size)]
             else:
-                
+                row = random.randomint(0, size-ship_size)
+                col = random.randomint(0, size-1)
+                positions = [(row+i, col) for i in range(ship_size)]
 
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
