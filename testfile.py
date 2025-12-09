@@ -1,3 +1,4 @@
+import random
 # ship class - paulina
 class Ship:
     def __init__(self, name, positions):
@@ -14,6 +15,14 @@ class Ship:
     
     def __repr__(self):
         return f"{self.name} is at {self.positions}"
+    
+    def place_ships(grid, ship_size):
+        size = len(grid)
+        placed = False
+
+        while not placed:
+            direction = random.choice(["North", ])
+
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 class Player:
@@ -26,7 +35,6 @@ class Player:
 #Sahith's code (Ship Location)
 
 
-import random
 
 
 def ship_location(grid):
