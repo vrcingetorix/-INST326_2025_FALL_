@@ -31,6 +31,11 @@ class Ship:
                 col = random.randomint(0, size-1)
                 positions = [(row+i, col) for i in range(ship_size)]
 
+            if all(grid[r][c] == 0 for r,c in positions): # row, col in positions
+                for r,c in positions:
+                    grid[r][c] = 1
+                placed = True
+        return positions
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
