@@ -21,7 +21,8 @@ class Ship:
         placed = False
 
         while not placed:
-            direction = random.choice(["North", ])
+            direction = random.choice(['horizontal', 'vertical'])
+            
 
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
