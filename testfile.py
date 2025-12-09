@@ -1,18 +1,27 @@
 # ship class - paulina
 class Ship:
-    def __init__(self, name, position):
+    def __init__(self, name, positions):
         self.name = name
-        self.position = position
+        self.positions = set(positions)
         self.hits = set()
     
     def __repr__(self):
         return f"{self.name} is at {self.position}"
+    
+    def record_hit(self, coord=0):
+        if coord == self.position:
+            self.hits.add(coord)
+
+    def sunkeness(self):
+        if 
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 class Player:
     def __init__(self, name):
         self.name = name
         self.special_attack_used = False
+
+
 
 #Sahith's code (Ship Location)
 
