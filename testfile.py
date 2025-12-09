@@ -13,7 +13,7 @@ class Ship:
             self.hits.add(coord)
 
     def sunkeness(self):
-        if 
+        return self.hits == self.positions
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 class Player:
