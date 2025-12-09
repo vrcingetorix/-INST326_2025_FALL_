@@ -4,7 +4,10 @@ class Ship:
         self.name = name
         self.position = position
         self.hits = set()
-
+    
+    def __repr__(self):
+        return f"{ship.name} is at {self.position}"
+    
 
 
 #Sahith's code (Ship Location)
