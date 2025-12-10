@@ -1,3 +1,17 @@
+"""     - NOTES -
+from paulina to sahith - i think ur func should return "return grid, (row, col)" so that we actually get coords
+from paulina to lauren - i think u need boundary checks prolly
+
+general: 
+    1. we need to finish the game loop so its functional
+    2. if name = main whatever
+    3. need special attack and move functions (can only use each once per game)
+    4. what are we doing with the command points? is defend just if the enemy hits near ur ship but misses?
+    5. argparse
+"""
+
+
+
 import random
 
 grid_size = 10
@@ -85,7 +99,7 @@ def ship_location(grid):
         row, col = random.choice(empty_cells)
         grid[row][col] = 1
             
-    return grid         # from paulina - i think this should be "return grid, (row, col)" so that we actually get coords
+    return grid         
 
 
 example_grid = [
@@ -174,7 +188,7 @@ def command_points(action, points):
     return points_updated
     
 #Lauren 
-def Scanning(grid,row, col,attack, ran):            # from paulina - i think u need boundary checks prolly
+def Scanning(grid,row, col,attack, ran):            
     """A scanning algorithm will be used to help provide information on ship locations.
       The algorithm will be able to check its position nearby and predict if ships 
       are located around. The function will scan the coordinate of its position and opposing ships.
