@@ -41,9 +41,6 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
             placed = True
         return positions
     
-
-        
-
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
 class Player:
