@@ -8,6 +8,7 @@ general:
     3. need special attack and move functions (can only use each once per game)
     4. what are we doing with the command points? is defend just if the enemy hits near ur ship but misses?
     5. argparse
+most important thing for now is to make at least working demo - tweaks can be made later
 """
 
 
