@@ -50,14 +50,19 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
 
-    def assign_ships(self, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
+    def assign_ships(self, grid, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
                 ship = Ship(f"Single ship {i+1}, [pos]")
                 self.ships.append(ship)
 
-        # gonna add a func for assigning multi ships
+        for i in range(num_multi):
+            ship_size = random.choice([2, 3, 4, 5])
+            positions = Ship.place_ship(self.grid, ship_size)
+            ship = Ship(f"Multi ship {i+1}", positions)
+            self.ships.append(ship)
+
 
 
 #Sahith's code (Ship Location)
@@ -108,11 +113,6 @@ for row in new_grid:
 # ○ Inputs: desired coordinates for attack
 # ○ Outputs: would be a string value of either attack or miss
 
-grid = [
-    [0, 0, 1],
-    [0, 1, 0],
-    [1, 0, 0]
-]
 
 def attack(grid):
     try:
