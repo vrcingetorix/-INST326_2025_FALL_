@@ -36,6 +36,11 @@ class Ship:
                     grid[r][c] = 1
                 placed = True
         return positions
+    
+    def assign_ships(player, grid, num_single = 2, num_multi = 1):
+        grid_size = 10
+
+        player.grid = [[0]*grid_size]
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
