@@ -60,6 +60,8 @@ class Player:
                 ship = Ship(f"Single ship {i+1}, [pos]")
                 self.ships.append(ship)
 
+        # gonna add a func for assigning multi ships
+
 
 #Sahith's code (Ship Location)
 
