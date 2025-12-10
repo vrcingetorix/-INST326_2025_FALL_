@@ -196,3 +196,15 @@ ran=range
         return True
     else: 
         return False
+    
+
+# game loop - paulina
+
+player_name = input("Please enter your name: ")
+player = Player(player_name)
+
+cpu = Player("CPU")
+
+player.assign_ships()
+cpu.assign_ships()
+
