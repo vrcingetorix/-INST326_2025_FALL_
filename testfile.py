@@ -53,10 +53,13 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
 
-    def assign_ships(player, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
-        player.ships = []
+    def assign_ships(self, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
+        for i in range(num_single):
+            self.grid, pos = ship_location(self.grid) # single cell ship
+            if pos: 
+                ship = Ship(f"Single ship {i+1}, [pos]")
+                self.ships.append(ship)
 
-        player.grid = [[0]*grid_size for _ in range(grid_size)]
 
 #Sahith's code (Ship Location)
 
