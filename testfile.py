@@ -208,3 +208,4 @@ cpu = Player("CPU")
 player.assign_ships()
 cpu.assign_ships()
 
+# need to add more
