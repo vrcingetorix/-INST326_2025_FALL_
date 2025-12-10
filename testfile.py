@@ -16,25 +16,26 @@ class Ship:
     def __repr__(self):
         return f"{self.name} is at {self.positions}"
     
-    def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
-        size = len(grid)
-        placed = False
+    
+def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
+    size = len(grid)
+    placed = False
 
-        while not placed:
-            direction = random.choice(['horizontal', 'vertical'])
-            if direction == 'horizontal':
-                row = random.randomint(0, size-1)
-                col = random.randomint(0, ship_size-1)
-                positions = [(row, col+i) for i in range(ship_size)]
-            else:
-                row = random.randomint(0, size-ship_size)
-                col = random.randomint(0, size-1)
-                positions = [(row+i, col) for i in range(ship_size)]
+    while not placed:
+        direction = random.choice(['horizontal', 'vertical'])
+        if direction == 'horizontal':
+            row = random.randint(0, size-1)
+            col = random.randint(0, ship_size-1)
+            positions = [(row, col+i) for i in range(ship_size)]
+        else:
+            row = random.randint(0, size-ship_size)
+            col = random.randint(0, size-1)
+            positions = [(row+i, col) for i in range(ship_size)]
 
-            if all(grid[r][c] == 0 for r,c in positions): # row, col in positions
-                for r,c in positions:
-                    grid[r][c] = 1
-                placed = True
+        if all(grid[r][c] == 0 for r,c in positions): # row, col in positions
+            for r,c in positions:
+                grid[r][c] = 1
+            placed = True
         return positions
     
     def assign_ships(player, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
