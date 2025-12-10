@@ -1,4 +1,7 @@
 import random
+
+grid_size = 10
+
 # ship class - paulina
 class Ship:
     def __init__(self, name, positions):
@@ -38,11 +41,7 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
             placed = True
         return positions
     
-    def assign_ships(player, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
-        grid_size = 10
-        player.ships = []
 
-        player.grid = [[0]*grid_size for _ in range(grid_size)]
         
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
@@ -51,8 +50,13 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.special_attack_used = False
+        self.grid = [[0]*grid_size for _ in range(grid_size)]
+        self.ships = []
 
+    def assign_ships(player, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
+        player.ships = []
 
+        player.grid = [[0]*grid_size for _ in range(grid_size)]
 
 #Sahith's code (Ship Location)
 
