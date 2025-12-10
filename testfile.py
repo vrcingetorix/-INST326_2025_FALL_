@@ -9,7 +9,7 @@ class Ship:
         self.positions = set(positions)
         self.hits = set()
     
-    def record_hit(self, coord=0):
+    def record_hit(self, coord):
         if coord in self.positions:
             self.hits.add(coord)
 
@@ -39,7 +39,7 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
             for r,c in positions:
                 grid[r][c] = 1
             placed = True
-        return positions
+            return positions
     
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
@@ -49,17 +49,18 @@ class Player:
         self.special_attack_used = False
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
+        self.previous_attacks = set()
 
-    def assign_ships(self, grid, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
+    def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
-                ship = Ship(f"Single ship {i+1}, [pos]")
+                ship = Ship(f"Single ship {i+1}", [pos])
                 self.ships.append(ship)
 
         for i in range(num_multi):
             ship_size = random.choice([2, 3, 4, 5])
-            positions = Ship.place_ship(self.grid, ship_size)
+            positions = place_ships(self.grid, ship_size)
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
 
@@ -84,7 +85,7 @@ def ship_location(grid):
         row, col = random.choice(empty_cells)
         grid[row][col] = 1
             
-    return grid
+    return grid         # from paulina - i think this should be "return grid, (row, col)" so that we actually get coords
 
 
 example_grid = [
@@ -137,7 +138,9 @@ def attack(grid):
     
     if ship:
         grid[row][col] = 2
-        return "Hit!" # this marks the attack as a hit
+        return {
+            f"Hit! {row, col}"
+                } # this marks the attack as a hit
     else:
         grid[row][col] = -1
         return "Miss!" # marks as a miss
@@ -171,7 +174,7 @@ def command_points(action, points):
     return points_updated
     
 #Lauren 
-def Scanning(grid,row, col,attack, ran):
+def Scanning(grid,row, col,attack, ran):            # from paulina - i think u need boundary checks prolly
     """A scanning algorithm will be used to help provide information on ship locations.
       The algorithm will be able to check its position nearby and predict if ships 
       are located around. The function will scan the coordinate of its position and opposing ships.
