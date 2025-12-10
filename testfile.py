@@ -7,7 +7,7 @@ class Ship:
         self.hits = set()
     
     def record_hit(self, coord=0):
-        if coord == self.position:
+        if coord in self.positions:
             self.hits.add(coord)
 
     def sunkeness(self):
@@ -37,10 +37,12 @@ class Ship:
                 placed = True
         return positions
     
-    def assign_ships(player, grid, num_single = 2, num_multi = 1):
+    def assign_ships(player, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
         grid_size = 10
+        player.ships = []
 
-        player.grid = [[0]*grid_size]
+        player.grid = [[0]*grid_size for _ in range(grid_size)]
+        
 
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
