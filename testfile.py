@@ -10,12 +10,13 @@ general:
     5. argparse
 most important thing for now is to make at least working demo - tweaks can be made later
 
+# TODO:
 special_attack - sahith
 defend - lauren
-hidden cpu grid (prints hits and misses only) - michael
+hidden cpu grid (prints hits and misses only) (in game loop) - michael
 cpu attack - paulina
-finish game loop/main menu - (add main menu and messages for the user)
-print_player_grid - 
+finish game loop/main menu (add main menu and messages for the user) - 
+print_player_grid (in game loop) - 
 if name = main - 
 """
 
