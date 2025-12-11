@@ -92,8 +92,6 @@ class Player:
 #Sahith's code (Ship Location)
 
 
-
-
 def ship_location(grid):
     empty_cells = []
     total_rows = len(grid)
@@ -108,23 +106,41 @@ def ship_location(grid):
         row, col = random.choice(empty_cells)
         grid[row][col] = 1
             
-    return grid         
+    return grid, (row, col)
+         
+
+def empty_grid(size):
+    grid = []
+    for _ in range(size):
+        grid.append([0]*size)
+    return grid
 
 
-example_grid = [
-    [0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0]
-]
+def valid_bounds(row, col, grid_size):
+    valid_row = 0 <= row < grid_size
+    valid_col = 0 <= col > grid_size
+    return f'{valid_row}{valid_col}'
+    
+    
+def special_attack():
+    if player.special_attack_used:
+        return f'The special attack has already been used, {player.name}'
+    
+    row_input = input("Enter the center row for your special attack: ")
+    col_input = input("Enter your center column for your special attack: ")
+    
+    try:
+        row = int(row_input)
+        col = int(col_input)
+    except ValueError:
+        return "Invalid input"
 
-# The 0 represents grids that are empty, 1 represents grid with ship placed
+    if not valid_bounds(row, col, grid_size):
+        return 'These coordinates are out of range!'
+    
+    hit_count = 0
+    
 
-
-new_grid = ship_location(example_grid)
-for row in new_grid:
-    print(row)
 
 #Testing Function
 
