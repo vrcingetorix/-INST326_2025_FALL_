@@ -9,6 +9,12 @@ general:
     4. what are we doing with the command points? is defend just if the enemy hits near ur ship but misses?
     5. argparse
 most important thing for now is to make at least working demo - tweaks can be made later
+
+special_attack -  michael
+defend - lauren
+hidden - michael
+cpu attack - sahith
+finish game loop/main menu - paulina
 """
 
 
