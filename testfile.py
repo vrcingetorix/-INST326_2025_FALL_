@@ -13,7 +13,9 @@ most important thing for now is to make at least working demo - tweaks can be ma
 special_attack - michael
 defend - lauren
 hidden - michael
-cpu attack - sahith
+cpu attack - sahith - place inside player class, cpu is a player, self and opponent, account for cells that have already been
+previously attacked, account for grid size, change values of cells after attacks. print message for human player (refer to 
+attack function for inspo)
 finish game loop/main menu - paulina
 """
 
