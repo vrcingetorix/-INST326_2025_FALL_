@@ -1,4 +1,5 @@
-"""     - NOTES -
+"""     
+    - NOTES -
 from paulina to sahith - i think ur func should return "return grid, (row, col)" so that we actually get coords
 from paulina to lauren - i think u need boundary checks prolly
 
