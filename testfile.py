@@ -39,7 +39,7 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
             for r,c in positions:
                 grid[r][c] = 1
             placed = True
-        return positions
+    return positions
     
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
@@ -82,20 +82,20 @@ def ship_location(grid):
     return grid
 
 
-example_grid = [
-    [0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0]
-]
+# example_grid = [
+#     [0, 0, 0, 0, 0],
+#     [0, 1, 0, 0, 0],
+#     [0, 0, 1, 0, 0],
+#     [0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0]
+# ]
 
-# The 0 represents grids that are empty, 1 represents grid with ship placed
+# # The 0 represents grids that are empty, 1 represents grid with ship placed
 
 
-new_grid = ship_location(example_grid)
-for row in new_grid:
-    print(row)
+# new_grid = ship_location(example_grid)
+# for row in new_grid:
+#     print(row)
 
 #Testing Function
 
@@ -171,7 +171,7 @@ def command_points(action, points):
     return points_updated
     
 #Lauren 
-def Scanning(grid,row, col,attack, ran):
+def scanning(grid,row, col,attack, ran):
     """A scanning algorithm will be used to help provide information on ship locations.
       The algorithm will be able to check its position nearby and predict if ships 
       are located around. The function will scan the coordinate of its position and opposing ships.
@@ -193,3 +193,15 @@ ran=range
         return True
     else: 
         return False
+    
+    #implement unit tests to test 
+    #can return null or a value to see if it is valid or not 
+    #make sure each function has a return value 
+    
+if __name__ == "__main__":
+    test_grid = [
+        [0, 0, 1],
+        [0, 1, 0],
+        [1, 0, 0]
+    ]
+    print(attack(test_grid))  
