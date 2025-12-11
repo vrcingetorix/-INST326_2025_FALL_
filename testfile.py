@@ -4,10 +4,8 @@ from paulina to lauren - i think u need boundary checks prolly
 
 general: 
     1. we need to finish the game loop so its functional
-    2. if name = main whatever
-    3. need special attack and move functions (can only use each once per game)
-    4. what are we doing with the command points? is defend just if the enemy hits near ur ship but misses?
-    5. argparse
+    2. need special attack and move functions (can only use each once per game)
+    3. incorporate comman points system somehow
 most important thing for now is to make at least working demo - tweaks can be made later
 
 # TODO:
@@ -18,6 +16,7 @@ cpu attack - paulina
 finish game loop/main menu (add main menu and messages for the user) - 
 print_player_grid (in game loop) - 
 if name = main - 
+
 """
 
 
