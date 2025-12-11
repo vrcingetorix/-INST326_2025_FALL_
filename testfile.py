@@ -151,14 +151,14 @@ class Player:
             except ValueError:
                 return "Invalid input."
             
-            valid_row = 0 <= row < len(grid)
-            valid_col = 0 <= col < len(grid[0])
+            valid_row = 0 <= row < grid_size
+            valid_col = 0 <= col < grid_size
 
             if not (valid_row and valid_col):
                 print("Coordinates out of range.") # checks bounds
                 continue
 
-            cell = grid[row][col]
+            cell = opponent.grid[row][col]
             previous_attacks = (cell == 2) or (cell == -1)
 
             if (row, col) in self.previous_attacks:
