@@ -1,6 +1,5 @@
 """     
     - NOTES -
-from paulina to sahith - i think ur func should return "return grid, (row, col)" so that we actually get coords
 from paulina to lauren - i think u need boundary checks prolly
 
 general: 
@@ -11,7 +10,7 @@ general:
     5. argparse
 most important thing for now is to make at least working demo - tweaks can be made later
 
-special_attack -  michael
+special_attack - michael
 defend - lauren
 hidden - michael
 cpu attack - sahith
@@ -86,7 +85,6 @@ class Player:
             positions = place_ships(self.grid, ship_size)
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
-e
 
 
 #Sahith's code (Ship Location)
