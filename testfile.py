@@ -10,13 +10,12 @@ general:
     5. argparse
 most important thing for now is to make at least working demo - tweaks can be made later
 
-special_attack - michael
+special_attack - sahith
 defend - lauren
-hidden - michael
-cpu attack - sahith - place inside player class, cpu is a player, self and opponent, account for cells that have already been
-previously attacked, account for grid size, change values of cells after attacks. print message for human player (refer to 
-attack function for inspo)
-finish game loop/main menu - paulina
+hidden cpu grid (prints hits and misses only) - michael
+cpu attack - paulina
+finish game loop/main menu - (add main menu and messages for the user)
+print_player_grid - 
 """
 
 
