@@ -11,6 +11,7 @@ general:
 most important thing for now is to make at least working demo - tweaks can be made later
 """
 
+
 import random
 
 grid_size = 10
@@ -63,6 +64,7 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
         self.previous_attacks = set()
+        self.defend = False
 
     def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
@@ -76,8 +78,6 @@ class Player:
             positions = place_ships(self.grid, ship_size)
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
-e
-
 
 #Sahith's code (Ship Location)
 
@@ -186,6 +186,13 @@ def command_points(action, points):
     points_updated = max(0, points - costs)
     return points_updated
 #Movement Function 
+
+def defend(player):
+    if player.defend:
+        return "Defending already taken place."
+    
+    player.defend = True
+    return "Defense activated"
 
 def move(player, ship, direction):
     #directions 
