@@ -5,7 +5,7 @@ from paulina to lauren - i think u need boundary checks prolly
 general: 
     1. we need to finish the game loop so its functional
     2. need special attack and move functions (can only use each once per game)
-    3. incorporate comman points system somehow
+    3. incorporate command points system in game loop
 most important thing for now is to make at least working demo - tweaks can be made later
 
 # TODO:
