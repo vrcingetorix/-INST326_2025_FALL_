@@ -1,3 +1,18 @@
+"""     - NOTES -
+from paulina to sahith - i think ur func should return "return grid, (row, col)" so that we actually get coords
+from paulina to lauren - i think u need boundary checks prolly
+
+general: 
+    1. we need to finish the game loop so its functional
+    2. if name = main whatever
+    3. need special attack and move functions (can only use each once per game)
+    4. what are we doing with the command points? is defend just if the enemy hits near ur ship but misses?
+    5. argparse
+most important thing for now is to make at least working demo - tweaks can be made later
+"""
+
+
+
 import random
 
 grid_size = 10
@@ -9,7 +24,7 @@ class Ship:
         self.positions = set(positions)
         self.hits = set()
     
-    def record_hit(self, coord=0):
+    def record_hit(self, coord):
         if coord in self.positions:
             self.hits.add(coord)
 
@@ -49,15 +64,21 @@ class Player:
         self.special_attack_used = False
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
+        self.previous_attacks = set()
 
-    def assign_ships(self, grid, num_single = 2, num_multi = 1): # assigns different types of ships, can be edited later
+    def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
-                ship = Ship(f"Single ship {i+1}, [pos]")
+                ship = Ship(f"Single ship {i+1}", [pos])
                 self.ships.append(ship)
 
-        # gonna add a func for assigning multi ships
+        for i in range(num_multi):
+            ship_size = random.choice([2, 3, 4, 5])
+            positions = place_ships(self.grid, ship_size)
+            ship = Ship(f"Multi ship {i+1}", positions)
+            self.ships.append(ship)
+
 
 
 #Sahith's code (Ship Location)
@@ -79,7 +100,7 @@ def ship_location(grid):
         row, col = random.choice(empty_cells)
         grid[row][col] = 1
             
-    return grid
+    return grid         
 
 
 # example_grid = [
@@ -108,11 +129,6 @@ def ship_location(grid):
 # ○ Inputs: desired coordinates for attack
 # ○ Outputs: would be a string value of either attack or miss
 
-grid = [
-    [0, 0, 1],
-    [0, 1, 0],
-    [1, 0, 0]
-]
 
 def attack(grid):
     try:
@@ -137,7 +153,9 @@ def attack(grid):
     
     if ship:
         grid[row][col] = 2
-        return "Hit!" # this marks the attack as a hit
+        return {
+            f"Hit! {row, col}"
+                } # this marks the attack as a hit
     else:
         grid[row][col] = -1
         return "Miss!" # marks as a miss
@@ -171,7 +189,7 @@ def command_points(action, points):
     return points_updated
     
 #Lauren 
-def scanning(grid,row, col,attack, ran):
+def Scanning(grid,row, col,attack, ran):
     """A scanning algorithm will be used to help provide information on ship locations.
       The algorithm will be able to check its position nearby and predict if ships 
       are located around. The function will scan the coordinate of its position and opposing ships.
@@ -193,15 +211,15 @@ ran=range
         return True
     else: 
         return False
-    
-    #implement unit tests to test 
-    #can return null or a value to see if it is valid or not 
-    #make sure each function has a return value 
-    
-if __name__ == "__main__":
-    test_grid = [
-        [0, 0, 1],
-        [0, 1, 0],
-        [1, 0, 0]
-    ]
-    print(attack(test_grid))  
+
+# game loop - paulina
+
+player_name = input("Please enter your name: ")
+player = Player(player_name)
+
+cpu = Player("CPU")
+
+player.assign_ships()
+cpu.assign_ships()
+
+# need to add more
