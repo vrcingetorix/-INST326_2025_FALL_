@@ -88,6 +88,10 @@ class Player:
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
 
+    
+            
+
+
 
 #Sahith's code (Ship Location)
 
@@ -134,6 +138,62 @@ def special_attack():
         return 'These coordinates are out of range!'
     
     hits = 0
+
+def attack(grid):
+    
+    while True:
+        try:
+            row = int(input("Enter the row you want to attack: "))
+            col = int(input("Enter the column you want to attack: "))
+        except ValueError:
+            return "Invalid input."
+        
+        valid_row = 0 <= row < len(grid)
+        valid_col = 0 <= col < len(grid[0])
+
+        if not (valid_row and valid_col):
+            return "Coordinates out of range." # checks bounds
+
+        cell = grid[row][col]
+        previous_attack = (cell == 2) or (cell == -1)
+
+        if previous_attack:
+            return "This position has already been attacked!" # prevents duplicate attacks 
+        break
+
+    self.previous_attacks.add((row, col))
+        
+    ship = (cell == 1)
+        
+    if ship:
+        grid[row][col] = 2
+        return {
+                f"Hit! {row, col}"
+                } # this marks the attack as a hit
+    else:
+        grid[row][col] = -1
+        return "Miss!" # marks as a miss
+        
+
+    
+def cpu_attack(self, opponent):
+        while True:
+            row = random.randint(0, grid_size-1)
+            col = random.randint(0, grid_size-1)
+
+            if (row, col) not in self.previous_attacks:
+                break
+
+            self.previous_attacks.add((row, col))
+
+            cell = opponent.grid[row][col]
+
+            if cell == 1:
+                opponent.grid[row][col] = 2
+                return f"CPU hit your ship at ({row, col})."
+            else:
+                opponent.grid[row][col] = -1
+                return f"CPU missed at ({row, col})!"
     
 
 
@@ -152,36 +212,7 @@ def special_attack():
 # ○ Outputs: would be a string value of either attack or miss
 
 
-def attack(grid):
-    try:
-        row = int(input("Enter the row you want to attack: "))
-        col = int(input("Enter the column you want to attack: "))
-    except ValueError:
-        return "Invalid input."
-    
-    valid_row = 0 <= row < len(grid)
-    valid_col = 0 <= col < len(grid[0])
 
-    if not (valid_row and valid_col):
-        return "Coordinates out of range." # checks bounds
-
-    cell = grid[row][col]
-    previous_attack = (cell == 2) or (cell == -1)
-
-    if previous_attack:
-        return "This position has already been attacked!" # prevents duplicate attacks    
-    
-    ship = (cell == 1)
-    
-    if ship:
-        grid[row][col] = 2
-        return {
-            f"Hit! {row, col}"
-                } # this marks the attack as a hit
-    else:
-        grid[row][col] = -1
-        return "Miss!" # marks as a miss
-    
 #Michael's Command Points System
 
 cost_of_action =  {
