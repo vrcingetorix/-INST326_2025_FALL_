@@ -16,6 +16,7 @@ hidden cpu grid (prints hits and misses only) - michael
 cpu attack - paulina
 finish game loop/main menu - (add main menu and messages for the user)
 print_player_grid - 
+if name = main - 
 """
 
 
@@ -204,12 +205,13 @@ class Player:
                     if (row, col) in ship.positions:
                             ship.record_hit((row,col))
                             if ship.sunkeness():
-                                return f"CPU sunk {ship_name}"
+                                return f"CPU sunk {ship.name}"
                             
                     return f"CPU hit {self.name}'s ship at ({row, col})."
             else:
                     opponent.grid[row][col] = -1
                     return f"CPU missed at ({row, col})!"
+    #Movement Function 
     def move(player, ship, direction):
     #directions 
         new_positions = []
@@ -277,7 +279,7 @@ def command_points(action, points):
     costs = cost_of_action.get(lower, 0)
     points_updated = max(0, points - costs)
     return points_updated
-#Movement Function 
+
 
 
     
