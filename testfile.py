@@ -250,8 +250,6 @@ class Player:
         return "Move successful"       
     
 
-
-
 #Michael's Command Points System
 
 cost_of_action =  {
@@ -281,8 +279,6 @@ def command_points(action, points):
     return points_updated
 
 
-
-    
 
 #Lauren 
 def Scanning(grid,row, col,attack, ran):            
