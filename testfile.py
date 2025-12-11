@@ -115,7 +115,7 @@ def empty_grid(size):
         grid.append([0]*size)
     return grid
 
-# edit 
+# edit 2
 def valid_bounds(row, col, size=grid_size):
     return (0 <= row < size) and (0<= col < size)
     
