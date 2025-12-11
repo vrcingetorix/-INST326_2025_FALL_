@@ -139,7 +139,7 @@ def special_attack():
     
     hits = 0
 
-def attack(grid):
+def attack(self, opponent):
     
     while True:
         try:
@@ -152,27 +152,35 @@ def attack(grid):
         valid_col = 0 <= col < len(grid[0])
 
         if not (valid_row and valid_col):
-            return "Coordinates out of range." # checks bounds
+            print("Coordinates out of range.") # checks bounds
 
         cell = grid[row][col]
         previous_attack = (cell == 2) or (cell == -1)
 
-        if previous_attack:
-            return "This position has already been attacked!" # prevents duplicate attacks 
+        if (row, col) in self.previous_attacks:
+            print("This position has already been attacked!") # prevents duplicate attacks 
+            continue
+        
         break
 
     self.previous_attacks.add((row, col))
+
+    cell = opponent.grid[row][col]
         
     ship = (cell == 1)
         
     if ship:
-        grid[row][col] = 2
-        return {
-                f"Hit! {row, col}"
-                } # this marks the attack as a hit
+        opponent.grid[row][col] = 2
+        print(f"Hit! {row, col}") # this marks the attack as a hit
+    
+        for ship in opponent.ships:
+            if (row, col) in ship.positions:
+                ship.record_hit((row, col))
+                if ship.sunkeness():
+                    return f"{self.name} sunk {ship.name}!"
     else:
-        grid[row][col] = -1
-        return "Miss!" # marks as a miss
+        opponent.grid[row][col] = -1
+        return "Miss at ({row, col})" # marks as a miss
         
 
     
@@ -190,10 +198,18 @@ def cpu_attack(self, opponent):
 
             if cell == 1:
                 opponent.grid[row][col] = 2
-                return f"CPU hit your ship at ({row, col})."
+            
+                for ship in opponent.ships:
+                    if (row, col) in ship.positions:
+                        ship.record_hit((row,col))
+                        if ship.sunkeness():
+                            return f"CPU sunk {ship_name}"
+                        
+                    return f"CPU hit {self.name}'s ship at ({row, col})."
             else:
                 opponent.grid[row][col] = -1
                 return f"CPU missed at ({row, col})!"
+            
     
 
 
