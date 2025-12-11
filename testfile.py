@@ -89,7 +89,7 @@ class Player:
             self.ships.append(ship)
 
 
-#Sahith's code (Ship Location)
+#Sahith's code (Ship Location + valid bounds + special attack)
 
 
 def ship_location(grid):
@@ -115,8 +115,8 @@ def empty_grid(size):
         grid.append([0]*size)
     return grid
 
-
-def valid_bounds(row, col, size):
+# edit 
+def valid_bounds(row, col, size=grid_size):
     return (0 <= row < size) and (0<= col < size)
     
 def special_attack(player, enemy_grid):
@@ -130,7 +130,7 @@ def special_attack(player, enemy_grid):
         c = int(col_input)
     except ValueError:
         return "Invalid input"
-    if not valid_bounds(r, c, grid_size):
+    if not valid_bounds(r, c):
         return f' The coordinates ({r}, {c}) are out of range'
     
     hits = 0
@@ -141,17 +141,26 @@ def special_attack(player, enemy_grid):
             result_row = r+rs
             result_col = c+cs
             
-            if not valid_bounds(result_row, result_col):
+            if not valid_bounds(result_row, result_col, grid_size):
                 continue
             
             current_val = enemy_grid[result_row][result_col]
-            if current_val == -1 or current_val == 2:
+            if current_val ==-1 or current_val == 2:
                 continue
-            if current_val == 1:
+            elif current_val == 1:
                 enemy_grid[result_row][result_col] = 2
                 hits = hits + 1
-            elif current_val == 0:
-                enemy_grid[result_row][result_col] =-1
+            else:
+                enemy_grid[result_row][result_col] = -1
+            
+    player.special_attack_used = True
+    return f' The player {player.name} used special attack, scoring {hits} hits'
+
+            
+        
+                
+                
+                
             
             
             
