@@ -93,22 +93,22 @@ class Player:
 
 
 def ship_location(grid):
-    cells = []
+    empty_areas = []
     rows = len(grid)
     columns = len(grid[0])
     
     for row in range(len(grid)):
         for col in range(columns):
             if grid[row][col] == 0:
-                cells.append((row, col))
+                empty_areas.append((row, col))
                 
-    if cells:
-        row, col = random.choice(cells)
+    if len(empty_areas)>0:
+        row, col = random.choice(empty_areas)
         grid[row][col] = 1
-            
-    return grid, (row, col)
+        return grid, (row, col)
+    elif len(empty_areas) == 0:
+        return grid, None
          
-
 def empty_grid(size):
     grid = []
     for _ in range(size):
@@ -117,13 +117,13 @@ def empty_grid(size):
 
 
 def valid_bounds(row, col, size):
-    return 0 <= row < size , 0<= col < size
+    return (0 <= row < size) and (0<= col < size)
     
-def special_attack():
+def special_attack(player, enemy_grid):
     if player.special_attack_used:
         return f'The special attack has already been used, {player.name}'
-    row_input = input("Enter the center row for your special attack: ")
-    col_input = input("Enter your center column for your special attack: ")
+    row_input = input("Enter your center row")
+    col_input = input("Enter your center column")
     
     try:
         r = int(row_input)
@@ -131,9 +131,34 @@ def special_attack():
     except ValueError:
         return "Invalid input"
     if not valid_bounds(r, c, grid_size):
-        return 'These coordinates are out of range!'
+        return f' The coordinates ({r}, {c}) are out of range'
     
     hits = 0
+    r_offset = [-1, 0, 1]
+    c_offset = [-1, 0, 1]
+    for rs in r_offset:
+        for cs in c_offset:
+            result_row = r+rs
+            result_col = c+cs
+            
+            if not valid_bounds(result_row, result_col):
+                continue
+            
+            current_val = enemy_grid[result_row][result_col]
+            if current_val == -1 or current_val == 2:
+                continue
+            if current_val == 1:
+                enemy_grid[result_row][result_col] = 2
+                hits = hits + 1
+            elif current_val == 0:
+                enemy_grid[result_row][result_col] =-1
+            
+            
+            
+            
+    
+            
+                
     
 
 
