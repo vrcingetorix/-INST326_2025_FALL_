@@ -72,6 +72,7 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
         self.previous_attacks = set()
+        self.defend = False
 
     def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
@@ -85,7 +86,7 @@ class Player:
             positions = place_ships(self.grid, ship_size)
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
-
+e
 
 
 #Sahith's code (Ship Location)
@@ -194,7 +195,46 @@ def command_points(action, points):
     costs = cost_of_action.get(lower, 0)
     points_updated = max(0, points - costs)
     return points_updated
+#Movement Function 
+
+def move(player, ship, direction):
+    #directions 
+    new_positions = []
+    for (rows, cols) in ship.positions:
+        if direction == "up":
+            row = rows - 1
+            col = cols
+        elif direction == "down":
+            row = rows + 1
+            col = cols
+        elif direction == "left":
+            row = rows
+            col = cols - 1
+        elif direction == "right":
+            row = rows
+            col = cols + 1
+        else:
+            return "Invalid direction"
+        
+        if row < 0 or row >= grid_size or col < 0 or col >= grid_size:
+            return "Out of Bounds"
+
+        cell = player.grid[row][col]
+        if cell != 0 and (row, col) not in ship.positions:
+            return "Cannot move"
+        
+        new_positions.append((row, col))
     
+    for (row, col) in ship.positions:
+        player.grid[row][col] = 0
+    
+    for (row, col) in new_positions:
+        player.grid[row][col] = 1
+    
+    ship.positions = set(new_positions)
+    return "Move successful"
+    
+
 #Lauren 
 def Scanning(grid,row, col,attack, ran):            
     """A scanning algorithm will be used to help provide information on ship locations.
