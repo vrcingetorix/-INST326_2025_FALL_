@@ -296,28 +296,53 @@ def move(player, ship, direction):
     
 
 #Lauren 
-def Scanning(grid,row, col,attack, ran):            
-    """A scanning algorithm will be used to help provide information on ship locations.
-      The algorithm will be able to check its position nearby and predict if ships 
-      are located around. The function will scan the coordinate of its position and opposing ships.
-        It will try to check for ships within a specific range and return a value based on 
-        if the ship is close by or not. 
-Inputs: scanning of position and the enemy ship coordinates ( both tuples ) 
-Output: would be a boolean value to decide whether or not the ship is actually in proximity  
-ran=range
-""" 
-    if attack == grid[row][col]:
-        return True 
-    elif grid[row+ran][col] == 1:
-        return True
-    elif grid[row-ran][col]== 1: 
-        return True
-    elif grid[row][col+ran] == 1:
-        return True 
-    elif grid[row][col-ran] == 1:
-        return True
+def Scanning(player,grid):            
+#     A scanning algorithm will be used to help provide information on ship locations.
+#       The algorithm will be able to check its position nearby and predict if ships 
+#       are located around. The function will scan the coordinate of its position and opposing ships.
+#         It will try to check for ships within a specific range and return a value based on 
+#         if the ship is close by or not. 
+# Inputs: scanning of position and the enemy ship coordinates ( both tuples ) 
+# Output: would be a boolean value to decide whether or not the ship is actually in proximity  
+
+    row=int((input("what row is the center of the area you are checking?")))
+    col=int((input("what column is the center of the area you are checking?")))
+    dir=(input("Please type 'd' for checking in one space diaginally and 'v' for checking in one space up and down along with left and right"))
+
+    if dir=='d': 
+        if player.grid[row][col]==1:
+            print("there is a ship in this area")
+            return True 
+        elif player.grid[row+1][col]==1 or player.grid[row-1][col]==1 or player.grid[row][col+1]==1 or player.grid[row][col-1]==1:
+            print("there is a ship in this area")
+            return True 
+        else: 
+            print("there is no ship in this area")
+            return False
+    elif dir=='v':
+        if player.grid[row][col]==1:
+            print("there is a ship in this area")
+            return True  
+        elif player.grid[row+1][col+1]==1 or player.grid[row+1][col-1]==1 or player.grid[row-1][col-1]==1 or player.grid[row-1][col+1]==1:
+            print("there is a ship in this area")
+            return True 
+        else: 
+            print("there is no ship in this area")
+            return False
     else: 
-        return False
+        print("The wrong button was pressed")
+        
+   
+def defend(player,grid):
+    row=0
+    col=0
+    while(player.grid[row][col]!=1):
+        row=int((input("what row is the cell you are defending?")))
+        col=int((input("what column is the center of the area you are checking?"))) 
+        if(player.grid[row][col]!=1): 
+            print("There's no ship there. Please select another cell")
+    player.grid[row][col]=2 
+    return player.grid
     
 
 # game loop - paulina
