@@ -84,10 +84,24 @@ def print_player_grid(grid):
             else:
                 print("W ", end="")  
         print()
+
 #Sahith's code (Ship Location)
 
 
 def ship_location(grid):
+    '''
+    This function places the ship in any single cell on the grid; it analyzes the
+    grid and sees whether empty cells, which are cells with a value of 0, exists. If
+    this is the case, then the empty cell's value changes from 0 to 1, meaning that it
+    is converted to a ship cell. 
+    
+    Parameters:
+        grid (list[list[int]]): This is the ship's placement on the player's grid
+    
+    Returns:
+        tuple: returns the updated grid as integers in a list under a list, and the
+        ship's position as a tuple (row, col) or None if the grid's spaces are occupied. 
+    '''
     empty_areas = []
     rows = len(grid)
     columns = len(grid[0])
