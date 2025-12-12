@@ -1,8 +1,5 @@
 """     
     - NOTES -
-from paulina to lauren - i think u need boundary checks prolly for scanning
-and for defend you need self.grid instead of player.grid
-from paulina to sahith - valid bounds needs to be separated by "and"
 
 general: 
     1. we need to finish the game loop so its functional
