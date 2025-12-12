@@ -189,6 +189,21 @@ class Player:
     #Sahith's special attack
     
     def special_attack(self, opponent):
+        '''
+        This function runs a 3x3 grid attack (emulating a blast radius) according
+        to the coordinates that the user enters. 
+        
+        Parameters:
+            opponent: The player object whose grid will be targeted for attack
+            
+        Returns:
+            str: A result message pops up if whether the person hits or it results
+            in an error
+            
+            *Special attack attacks 9 cells in total as it is a 3x3 grid
+        '''
+        
+        
         if self.special_attack_used:
             return f'The special attack has already been used, {self.name}'
         row_input = input("Enter your center row")
