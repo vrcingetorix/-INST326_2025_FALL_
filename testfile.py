@@ -19,9 +19,25 @@ will remove later test tes test bfvtfhdt dhsrgbrb
 import random
 import os
 
+
+#Sahith's valid bounds function
+
 grid_size = 10
 
+
 def valid_bounds(row, col, size=grid_size):
+    '''
+    The function checks whether a specific coordinate is in the bounds of the grid
+    
+    Parameters:
+        row (int): checking the row's bound validity
+        col (int): checking the column's bound validity
+        size (int): the size of the grid
+        
+    Returns: 
+        bool: Marks it as True if the coordinates are within grid parameters; 
+        if not, it is False
+    '''
     return (0 <= row < size) and (0<= col < size)
 
 def empty_grid(size):
@@ -58,6 +74,7 @@ def print_player_grid(grid):
                 print("W ", end="")  
         print()
 #Sahith's code (Ship Location)
+
 
 def ship_location(grid):
     empty_areas = []
