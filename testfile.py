@@ -4,45 +4,54 @@ from paulina to lauren - i think u need boundary checks prolly
 
 general: 
     1. we need to finish the game loop so its functional
-    2. if name = main whatever
-    3. need special attack and move functions (can only use each once per game)
-    4. what are we doing with the command points? is defend just if the enemy hits near ur ship but misses?
-    5. argparse
+    2. need special attack and move functions (can only use each once per game)
+    3. incorporate command points system in game loop
 most important thing for now is to make at least working demo - tweaks can be made later
 
-special_attack - michael
+# TODO:
 defend - lauren
-hidden - michael
-cpu attack - sahith - place inside player class, cpu is a player, self and opponent, account for cells that have already been
-previously attacked, account for grid size, change values of cells after attacks. print message for human player (refer to 
-attack function for inspo)
-finish game loop/main menu - paulina
-"""
+hidden cpu grid (prints hits and misses only) (in game loop) - michael
+cpu attack - paulina
+finish game loop/main menu (add main menu and messages for the user) - 
+print_player_grid (in game loop) - 
+if name = main - 
 
+"""
 
 
 import random
 
 grid_size = 10
 
-# ship class - paulina
-class Ship:
-    def __init__(self, name, positions):
-        self.name = name
-        self.positions = set(positions)
-        self.hits = set()
-    
-    def record_hit(self, coord):
-        if coord in self.positions:
-            self.hits.add(coord)
+def valid_bounds(row, col, size):
+    return 0 <= row < size , 0<= col < size
 
-    def sunkeness(self):
-        return self.hits == self.positions
+def empty_grid(size):
+    grid = []
+    for _ in range(size):
+        grid.append([0]*size)
+    return grid
+
+#Sahith's code (Ship Location)
+
+
+def ship_location(grid):
+    cells = []
+    rows = len(grid)
+    columns = len(grid[0])
     
-    def __repr__(self):
-        return f"{self.name} is at {self.positions}"
-    
-    
+    for row in range(len(grid)):
+        for col in range(columns):
+            if grid[row][col] == 0:
+                cells.append((row, col))
+                
+    if cells:
+        row, col = random.choice(cells)
+        grid[row][col] = 1
+            
+    return grid, (row, col)
+         
+
 def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
     size = len(grid)
     placed = False
@@ -63,6 +72,26 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
                 grid[r][c] = 1
             placed = True
             return positions
+
+
+# ship class - paulina
+class Ship:
+    def __init__(self, name, positions):
+        self.name = name
+        self.positions = set(positions)
+        self.hits = set()
+    
+    def record_hit(self, coord):
+        if coord in self.positions:
+            self.hits.add(coord)
+
+    def sunkeness(self):
+        return self.hits == self.positions
+    
+    def __repr__(self):
+        return f"{self.name} is at {self.positions}"
+    
+    
     
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
@@ -176,6 +205,21 @@ def special_attack(player, enemy_grid):
 
 #Testing Function
 
+    def special_attack():
+        if player.special_attack_used:
+            return f'The special attack has already been used, {player.name}'
+        row_input = input("Enter the center row for your special attack: ")
+        col_input = input("Enter your center column for your special attack: ")
+        
+        try:
+            r = int(row_input)
+            c = int(col_input)
+        except ValueError:
+            return "Invalid input"
+        if not valid_bounds(r, c, grid_size):
+            return 'These coordinates are out of range!'
+        
+        hits = 0
 
 # Paulina's function - attack mechanism
 
@@ -185,37 +229,114 @@ def special_attack(player, enemy_grid):
 # ○ Inputs: desired coordinates for attack
 # ○ Outputs: would be a string value of either attack or miss
 
+    def attack(self, opponent):
+        
+        while True:
+            try:
+                row = int(input("Enter the row you want to attack: "))
+                col = int(input("Enter the column you want to attack: "))
+            except ValueError:
+                return "Invalid input."
+            
+            valid_row = 0 <= row < grid_size
+            valid_col = 0 <= col < grid_size
 
-def attack(grid):
-    try:
-        row = int(input("Enter the row you want to attack: "))
-        col = int(input("Enter the column you want to attack: "))
-    except ValueError:
-        return "Invalid input."
-    
-    valid_row = 0 <= row < len(grid)
-    valid_col = 0 <= col < len(grid[0])
+            if not (valid_row and valid_col):
+                print("Coordinates out of range.") # checks bounds
+                continue
 
-    if not (valid_row and valid_col):
-        return "Coordinates out of range." # checks bounds
+            cell = opponent.grid[row][col]
+            previous_attacks = (cell == 2) or (cell == -1)
 
-    cell = grid[row][col]
-    previous_attack = (cell == 2) or (cell == -1)
+            if (row, col) in self.previous_attacks:
+                print("This position has already been attacked!") # prevents duplicate attacks 
+                continue
+            
+            break
 
-    if previous_attack:
-        return "This position has already been attacked!" # prevents duplicate attacks    
+        self.previous_attacks.add((row, col))
+
+        cell = opponent.grid[row][col]
+            
+        ship = (cell == 1)
+            
+        if ship:
+            opponent.grid[row][col] = 2
+            print(f"Hit! ({row, col})") # this marks the attack as a hit
+        
+            for ship in opponent.ships:
+                if (row, col) in ship.positions:
+                    ship.record_hit((row, col))
+                    if ship.sunkeness():
+                        return f"{self.name} sunk {ship.name}!"
+        else:
+            opponent.grid[row][col] = -1
+            return f"Miss at ({row, col})" # marks as a miss
+        
+    def cpu_attack(self, opponent):
+            while True:
+                row = random.randint(0, grid_size-1)
+                col = random.randint(0, grid_size-1)
+
+                if (row, col) not in self.previous_attacks:
+                    break
+
+            self.previous_attacks.add((row, col))
+
+            cell = opponent.grid[row][col]
+
+            if cell == 1:
+                opponent.grid[row][col] = 2
+                
+                for ship in opponent.ships:
+                    if (row, col) in ship.positions:
+                            ship.record_hit((row,col))
+                            if ship.sunkeness():
+                                return f"CPU sunk {ship.name}"
+                            
+                    return f"CPU hit {self.name}'s ship at ({row, col})."
+            else:
+                    opponent.grid[row][col] = -1
+                    return f"CPU missed at ({row, col})!"
+    #Movement Function 
+    def move(player, ship, direction):
+    #directions 
+        new_positions = []
+        for (rows, cols) in ship.positions:
+            if direction == "up":
+                row = rows - 1
+                col = cols
+            elif direction == "down":
+                row = rows + 1
+                col = cols
+            elif direction == "left":
+                row = rows
+                col = cols - 1
+            elif direction == "right":
+                row = rows
+                col = cols + 1
+            else:
+                return "Invalid direction"
+            
+            if row < 0 or row >= grid_size or col < 0 or col >= grid_size:
+                return "Out of Bounds"
+
+            cell = player.grid[row][col]
+            if cell != 0 and (row, col) not in ship.positions:
+                return "Cannot move"
+            
+            new_positions.append((row, col))
+        
+        for (row, col) in ship.positions:
+            player.grid[row][col] = 0
+        
+        for (row, col) in new_positions:
+            player.grid[row][col] = 1
+        
+        ship.positions = set(new_positions)
+        return "Move successful"       
     
-    ship = (cell == 1)
-    
-    if ship:
-        grid[row][col] = 2
-        return {
-            f"Hit! {row, col}"
-                } # this marks the attack as a hit
-    else:
-        grid[row][col] = -1
-        return "Miss!" # marks as a miss
-    
+
 #Michael's Command Points System
 
 cost_of_action =  {
@@ -243,45 +364,8 @@ def command_points(action, points):
     costs = cost_of_action.get(lower, 0)
     points_updated = max(0, points - costs)
     return points_updated
-#Movement Function 
 
-def move(player, ship, direction):
-    #directions 
-    new_positions = []
-    for (rows, cols) in ship.positions:
-        if direction == "up":
-            row = rows - 1
-            col = cols
-        elif direction == "down":
-            row = rows + 1
-            col = cols
-        elif direction == "left":
-            row = rows
-            col = cols - 1
-        elif direction == "right":
-            row = rows
-            col = cols + 1
-        else:
-            return "Invalid direction"
-        
-        if row < 0 or row >= grid_size or col < 0 or col >= grid_size:
-            return "Out of Bounds"
 
-        cell = player.grid[row][col]
-        if cell != 0 and (row, col) not in ship.positions:
-            return "Cannot move"
-        
-        new_positions.append((row, col))
-    
-    for (row, col) in ship.positions:
-        player.grid[row][col] = 0
-    
-    for (row, col) in new_positions:
-        player.grid[row][col] = 1
-    
-    ship.positions = set(new_positions)
-    return "Move successful"
-    
 
 #Lauren 
 def Scanning(grid,row, col,attack, ran):            
