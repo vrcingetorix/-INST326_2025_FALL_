@@ -20,9 +20,8 @@ print_player_grid (in game loop) -  michael
 will remove later test tes test bfvtfhdt dhsrgbrb
 """
 
-
-
 import random
+import os
 
 grid_size = 10
 
@@ -409,6 +408,7 @@ if __name__ == "__main__":
     print("Ships placed. Let the battle begin!")
 
     while True: 
+        os.system('cls')
         
         print(f"{player.name}'s turn.")
         print()
