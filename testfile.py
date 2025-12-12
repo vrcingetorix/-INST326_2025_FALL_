@@ -135,9 +135,9 @@ class Player:
         self.previous_attacks = set()
         self.is_defending = False
         self.defended_cell = None
-        self.command_points = 10  
+        self.command_points = 20
 
-    def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
+    def assign_ships(self, num_single = 2, num_multi = 3): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
