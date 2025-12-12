@@ -191,8 +191,8 @@ class Player:
         row=0
         col=0
         while(self.grid[row][col]!=1):
-            row=int((input("what row is the cell you are defending?")))
-            col=int((input("what column is the center of the area you are checking?"))) 
+            row=int(input("what row is the cell you are defending?"))
+            col=int(input("what column is the center of the area you are checking?")) 
             if(self.grid[row][col]!=1): 
                 print("There's no ship there. Please select another cell")
                 continue
@@ -279,7 +279,7 @@ class Player:
                             if ship.sunkeness():
                                 return f"CPU sunk {ship.name}"
                             
-                return f"CPU hit {self.name}'s ship at ({row, col})."
+                    return f"CPU hit {self.name}'s ship at ({row, col})."
             else:
                     opponent.grid[row][col] = -1
                     return f"CPU missed at ({row, col})!"
@@ -365,20 +365,20 @@ def scanning(player,grid):
     dir=(input("Please type 'd' for checking in one space diaginally and 'v' for checking in one space up and down along with left and right"))
 
     if dir=='d': 
-        if player.grid[row][col]==1:
+        if grid[row][col]==1:
             print("there is a ship in this area")
             return True 
-        elif player.grid[row+1][col]==1 or player.grid[row-1][col]==1 or player.grid[row][col+1]==1 or player.grid[row][col-1]==1:
+        elif grid[row+1][col]==1 or grid[row-1][col]==1 or grid[row][col+1]==1 or grid[row][col-1]==1:
             print("there is a ship in this area")
             return True 
         else: 
             print("there is no ship in this area")
             return False
     elif dir=='v':
-        if player.grid[row][col]==1:
+        if grid[row][col]==1:
             print("there is a ship in this area")
             return True  
-        elif player.grid[row+1][col+1]==1 or player.grid[row+1][col-1]==1 or player.grid[row-1][col-1]==1 or player.grid[row-1][col+1]==1:
+        elif grid[row+1][col+1]==1 or grid[row+1][col-1]==1 or grid[row-1][col-1]==1 or grid[row-1][col+1]==1:
             print("there is a ship in this area")
             return True 
         else: 
@@ -471,7 +471,7 @@ if __name__ == "__main__":
             points_used = command_points("scan", player.command_points)
             if points_used is not None:
                 player.command_points = points_used
-                scanning(cpu, cpu.grid)
+                scanning(player, cpu.grid)
             else:
                 print("Not enough command points for Scan action.")
         else: 
