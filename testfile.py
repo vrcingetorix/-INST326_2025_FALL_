@@ -26,8 +26,8 @@ import random
 
 grid_size = 10
 
-def valid_bounds(row, col, size):
-    return 0 <= row < size , 0<= col < size
+def valid_bounds(row, col, size=grid_size):
+    return (0 <= row < size) and (0<= col < size)
 
 def empty_grid(size):
     grid = []
@@ -36,7 +36,7 @@ def empty_grid(size):
     return grid
 
 def print_hidden_grid(grid):
-    print(" 0 1 2 3 4 5 6 7 8 9 10")
+    print(" 0 1 2 3 4 5 6 7 8 9")
     for i in range(10):
         print(f"{i} ", end="")
         for j in grid[i]:
@@ -49,7 +49,7 @@ def print_hidden_grid(grid):
         print()
         
 def print_player_grid(grid):
-    print(" 0 1 2 3 4 5 6 7 8 9 10")
+    print(" 0 1 2 3 4 5 6 7 8 9")
     for i in range(10):
         print(f"{i} ", end="")
         for j in grid[i]:
@@ -66,20 +66,21 @@ def print_player_grid(grid):
 
 
 def ship_location(grid):
-    cells = []
+    empty_areas = []
     rows = len(grid)
     columns = len(grid[0])
     
     for row in range(len(grid)):
         for col in range(columns):
             if grid[row][col] == 0:
-                cells.append((row, col))
+                empty_areas.append((row, col))
                 
-    if cells:
-        row, col = random.choice(cells)
+    if len(empty_areas)>0:
+        row, col = random.choice(empty_areas)
         grid[row][col] = 1
-            
-    return grid, (row, col)
+        return grid, (row, col)
+    elif len(empty_areas) == 0:
+        return grid, None
          
 
 def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
@@ -90,7 +91,7 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
         direction = random.choice(['horizontal', 'vertical'])
         if direction == 'horizontal':
             row = random.randint(0, size-1)
-            col = random.randint(0, ship_size-1)
+            col = random.randint(0, size - ship_size)
             positions = [(row, col+i) for i in range(ship_size)]
         else:
             row = random.randint(0, size-ship_size)
@@ -132,7 +133,7 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
         self.previous_attacks = set()
-        self.defend = False
+        self.defense = False
         self.command_points = 10  
     def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
@@ -147,22 +148,43 @@ class Player:
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
 
-    def special_attack():
-        if player.special_attack_used:
-            return f'The special attack has already been used, {player.name}'
-        row_input = input("Enter the center row for your special attack: ")
-        col_input = input("Enter your center column for your special attack: ")
-        
+    def special_attack(self, opponent):
+        if self.special_attack_used:
+            return f'The special attack has already been used, {self.name}'
+        row_input = input("Enter your center row")
+        col_input = input("Enter your center column")
+            
         try:
-            r = int(row_input)
-            c = int(col_input)
+                r = int(row_input)
+                c = int(col_input)
         except ValueError:
-            return "Invalid input"
-        if not valid_bounds(r, c, grid_size):
-            return 'These coordinates are out of range!'
+                return "Invalid input"
+        if not valid_bounds(r, c):
+                return f' The coordinates ({r}, {c}) are out of range'
+            
+        hits = 0
+        r_offset = [-1, 0, 1]
+        c_offset = [-1, 0, 1]
+        for rs in r_offset:
+                for cs in c_offset:
+                    result_row = r+rs
+                    result_col = c+cs
+                    
+                    if not valid_bounds(result_row, result_col, grid_size):
+                        continue
+                    
+                    current_val = opponent.grid[result_row][result_col]
+                    if current_val ==-1 or current_val == 2:
+                        continue
+                    elif current_val == 1:
+                        opponent.grid[result_row][result_col] = 2
+                        hits = hits + 1
+                    else:
+                        opponent.grid[result_row][result_col] = -1
+                    
+        self.special_attack_used = True
+        return f' The player {player.name} used special attack, scoring {hits} hits'
         
-        hits = 0 
-    
     def defend(self,grid):
         row=0
         col=0
@@ -274,7 +296,7 @@ class Player:
             if row < 0 or row >= grid_size or col < 0 or col >= grid_size:
                 return "Out of Bounds"
 
-            cell = player.grid[row][col]
+            cell = self.grid[row][col]
             if cell != 0 and (row, col) not in ship.positions:
                 return "Cannot move"
             
@@ -460,4 +482,4 @@ if __name__ == "__main__":
             break
     print("Game Over!!!")
                 
-    # gotta implement actual game loop func, but itll be called like this
+
