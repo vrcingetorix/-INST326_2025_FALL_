@@ -41,6 +41,17 @@ def valid_bounds(row, col, size=grid_size):
     return (0 <= row < size) and (0<= col < size)
 
 def empty_grid(size):
+    '''
+    Initializes a square grid with zeros in each cell, indicating empty positions
+    
+    Parameters:
+        size (int): width and height of the grid
+        
+        
+    Returns:
+        list[list[int]]: It returns a 2d list where each element is 0
+    '''
+    
     grid = []
     for _ in range(size):
         grid.append([0]*size)
