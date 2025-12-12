@@ -17,7 +17,7 @@ hidden cpu grid (prints hits and misses only) (in game loop) - michael
 finish game loop/main menu (add main menu and messages for the user) - 
 print_player_grid (in game loop) -  michael
 
-will remove later test tes test bfvtfhdt dhs
+will remove later test tes test bfvtfhdt dhsrgbrb
 """
 
 
