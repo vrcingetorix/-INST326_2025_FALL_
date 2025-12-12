@@ -12,13 +12,10 @@ most important thing for now is to make at least working demo - tweaks can be ma
 special_attack - sahith
 defend - lauren
 hidden cpu grid (prints hits and misses only) (in game loop) - michael
-cpu attack - paulina
 finish game loop/main menu (add main menu and messages for the user) - 
-print_player_grid (in game loop) - 
-if name = main - 
+print_player_grid (in game loop) -  
 
 """
-
 
 import random
 
@@ -305,16 +302,20 @@ ran=range
         return False
     
 
-# game loop - paulina
-
-player_name = input("Please enter your name: ")
-player = Player(player_name)
-
-cpu = Player("CPU")
-
-player.assign_ships()
-cpu.assign_ships()
+# game loop 
 
 
 
-# need to add more
+
+# main func - paulina
+if __name__ == "__main__":
+    print("Welcome to Battleship Rumble!")
+    player_name = input("Please enter your name: ")
+    player = Player(player_name)
+
+    cpu = Player("CPU")
+
+    player.assign_ships()
+    cpu.assign_ships()
+
+    game_loop(player, cpu) # gotta implement actual game loop func, but itll be called like this
