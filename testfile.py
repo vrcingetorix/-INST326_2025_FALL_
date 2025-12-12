@@ -158,7 +158,7 @@ class Player:
                 return "Invalid input"
         if not valid_bounds(r, c):
                 return f' The coordinates ({r}, {c}) are out of range'
-            
+            # test
         hits = 0
         r_offset = [-1, 0, 1]
         c_offset = [-1, 0, 1]
