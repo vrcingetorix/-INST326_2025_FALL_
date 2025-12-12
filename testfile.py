@@ -59,7 +59,6 @@ def print_player_grid(grid):
         print()
 #Sahith's code (Ship Location)
 
-
 def ship_location(grid):
     empty_areas = []
     rows = len(grid)
@@ -145,6 +144,8 @@ class Player:
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
 
+    #Sahith's special attack
+    
     def special_attack(self, opponent):
         if self.special_attack_used:
             return f'The special attack has already been used, {self.name}'
@@ -152,12 +153,12 @@ class Player:
         col_input = input("Enter your center column")
             
         try:
-                r = int(row_input)
-                c = int(col_input)
+            r = int(row_input)
+            c = int(col_input)
         except ValueError:
-                return "Invalid input"
+            return "Invalid input"
         if not valid_bounds(r, c):
-                return f' The coordinates ({r}, {c}) are out of range'
+            return f' The coordinates ({r}, {c}) are out of range'
             # test
         hits = 0
         r_offset = [-1, 0, 1]
@@ -270,14 +271,14 @@ class Player:
                 
                 for ship in opponent.ships:
                     if (row, col) in ship.positions:
-                            ship.record_hit((row,col))
-                            if ship.sunkeness():
-                                return f"CPU sunk {ship.name}"
+                        ship.record_hit((row,col))
+                        if ship.sunkeness():
+                            return f"CPU sunk {ship.name}"
                             
-                    return f"CPU hit {self.name}'s ship at ({row, col})."
+                return f"CPU hit {self.name}'s ship at ({row, col})."
             else:
-                    opponent.grid[row][col] = -1
-                    return f"CPU missed at ({row, col})!"
+                opponent.grid[row][col] = -1
+                return f"CPU missed at ({row, col})!"
     #Movement Function 
     def move(self, ship, direction):
     #directions 
