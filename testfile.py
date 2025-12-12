@@ -33,6 +33,33 @@ def empty_grid(size):
         grid.append([0]*size)
     return grid
 
+def print_hidden_grid(grid):
+    print(" 0 1 2 3 4 5 6 7 8 9 10")
+    for i in range(10):
+        print(f"{i} ", end="")
+        for j in grid[i]:
+            if j == 2:
+                print("X ", end="") 
+            elif j == -1:
+                print("O ", end="")  
+            else:
+                print("W ", end="")  
+        print()
+        
+def print_player_grid(grid):
+    print(" 0 1 2 3 4 5 6 7 8 9 10")
+    for i in range(10):
+        print(f"{i} ", end="")
+        for j in grid[i]:
+            if j == 1:
+                print("S ", end="")  
+            elif j == 2:
+                print("X ", end="") 
+            elif j == -1:
+                print("O ", end="")  
+            else:
+                print("W ", end="")  
+        print()
 #Sahith's code (Ship Location)
 
 
@@ -104,7 +131,7 @@ class Player:
         self.ships = []
         self.previous_attacks = set()
         self.defend = False
-
+        self.command_points = 10  
     def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
@@ -223,7 +250,7 @@ class Player:
                     opponent.grid[row][col] = -1
                     return f"CPU missed at ({row, col})!"
     #Movement Function 
-    def move(player, ship, direction):
+    def move(self, ship, direction):
     #directions 
         new_positions = []
         for (rows, cols) in ship.positions:
@@ -252,10 +279,10 @@ class Player:
             new_positions.append((row, col))
         
         for (row, col) in ship.positions:
-            player.grid[row][col] = 0
+            self.grid[row][col] = 0
         
         for (row, col) in new_positions:
-            player.grid[row][col] = 1
+            self.grid[row][col] = 1
         
         ship.positions = set(new_positions)
         return "Move successful"       
@@ -281,14 +308,12 @@ def command_points(action, points):
     Returns:
         points_updated (int): updated command point total
     """
-    for correct in cost_of_action.keys():
-        if action.lower() == correct:
-            break
-    lower = action.lower()
-    costs = cost_of_action.get(lower, 0)
-    points_updated = max(0, points - costs)
-    return points_updated
-
+    action = action.lower()
+    costs = cost_of_action.get(action, 0)
+    if points >= costs:
+        return points - costs
+    else:
+        return None
 
 
 #Lauren 
