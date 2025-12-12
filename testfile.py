@@ -13,7 +13,7 @@ special_attack - sahith
 defend - lauren
 hidden cpu grid (prints hits and misses only) (in game loop) - michael
 finish game loop/main menu (add main menu and messages for the user) - 
-print_player_grid (in game loop) -  
+print_player_grid (in game loop) -  michael
 
 """
 
@@ -319,4 +319,3 @@ if __name__ == "__main__":
     cpu.assign_ships()
 
     game_loop(player, cpu) # gotta implement actual game loop func, but itll be called like this
-    
