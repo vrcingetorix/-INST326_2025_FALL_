@@ -319,3 +319,4 @@ if __name__ == "__main__":
     cpu.assign_ships()
 
     game_loop(player, cpu) # gotta implement actual game loop func, but itll be called like this
+    
