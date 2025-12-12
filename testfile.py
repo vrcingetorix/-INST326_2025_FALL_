@@ -278,7 +278,7 @@ def command_points(action, points):
 
 
 #Lauren 
-def Scanning(player,grid):            
+def scanning(player,grid):            
 #     A scanning algorithm will be used to help provide information on ship locations.
 #       The algorithm will be able to check its position nearby and predict if ships 
 #       are located around. The function will scan the coordinate of its position and opposing ships.
