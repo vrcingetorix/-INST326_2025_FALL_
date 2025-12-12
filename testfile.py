@@ -19,7 +19,7 @@ print_player_grid (in game loop) -  michael
 
 import random
 
-grid_size = 10
+grid_size = 11
 
 def valid_bounds(row, col, size):
     return 0 <= row < size , 0<= col < size
