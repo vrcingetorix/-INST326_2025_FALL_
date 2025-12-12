@@ -343,4 +343,6 @@ if __name__ == "__main__":
     player.assign_ships()
     cpu.assign_ships()
 
-    game_loop(player, cpu) # gotta implement actual game loop func, but itll be called like this
+    player()
+    cpu() 
+    # gotta implement actual game loop func, but itll be called like this
