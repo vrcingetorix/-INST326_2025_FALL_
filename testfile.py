@@ -133,8 +133,10 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
         self.previous_attacks = set()
-        self.defense = False
+        self.is_defending = False
+        self.defended_cell = None
         self.command_points = 10  
+
     def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
@@ -183,7 +185,7 @@ class Player:
                         opponent.grid[result_row][result_col] = -1
                     
         self.special_attack_used = True
-        return f' The player {player.name} used special attack, scoring {hits} hits'
+        return f' The player {self.name} used special attack, scoring {hits} hits'
         
     def defend(self,grid):
         row=0
@@ -193,7 +195,10 @@ class Player:
             col=int((input("what column is the center of the area you are checking?"))) 
             if(self.grid[row][col]!=1): 
                 print("There's no ship there. Please select another cell")
-        self.grid[row][col]=2 
+                continue
+            break
+        self.is_defending=True
+        self.defended_cell=(row,col)
         return self.grid
 
 # Paulina's function - attack mechanism
@@ -269,7 +274,7 @@ class Player:
                             if ship.sunkeness():
                                 return f"CPU sunk {ship.name}"
                             
-                    return f"CPU hit {self.name}'s ship at ({row, col})."
+                return f"CPU hit {self.name}'s ship at ({row, col})."
             else:
                     opponent.grid[row][col] = -1
                     return f"CPU missed at ({row, col})!"
@@ -399,7 +404,6 @@ if __name__ == "__main__":
     print("Ships placed. Let the battle begin!")
 
     while True: 
-        player.command_points = 10
         
         print(f"{player.name}'s turn.")
         print()
