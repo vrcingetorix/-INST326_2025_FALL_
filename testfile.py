@@ -263,6 +263,11 @@ class Player:
 
             self.previous_attacks.add((row, col))
 
+            if opponent.is_defending and (row, col) == opponent.defended_cell:
+                opponent.is_defending = False
+                opponent.defended_cell = None
+                return f"CPU attacked ({row, col}) but it was defended!"
+
             cell = opponent.grid[row][col]
 
             if cell == 1:
