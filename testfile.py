@@ -371,10 +371,93 @@ if __name__ == "__main__":
     player = Player(player_name)
 
     cpu = Player("CPU")
-
+    print("Placing ships...")
     player.assign_ships()
     cpu.assign_ships()
+    print("Ships placed. Let the battle begin!")
 
-    player()
-    cpu() 
+    while True: 
+        player.command_points = 10
+        
+        print(f"{player.name}'s turn.")
+        print()
+        
+        print("CPU's grid:")
+        print_hidden_grid(cpu.grid)
+        
+        print(f"\n{player.name}'s grid:")
+        print_player_grid(player.grid)
+        
+        print(f"\nCommand Points: {player.command_points}")
+        print("1. Attack (3 pts)")
+        print("2. Defend (2 pts)")
+        print("3. Move (1 pt)")
+        print("4. Special Attack (5 pts)")
+        print("5. Scan (2 pts)")
+        
+        select = input("Choose your action (1-5): ")
+        if select == '1':
+            points_used = command_points("attack", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                result = player.attack(cpu)
+                print(result)
+            else:
+                print("Not enough command points for Attack.")
+        elif select == '2':
+            points_used = command_points("defend", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                player.defend(player.grid)
+                print("Defend action executed.")
+            else:
+                print("Not enough command points for Defend.")
+        elif select == '3':
+            points_used = command_points("move", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                print("Select a ship to move:")
+                for i, ship in enumerate(player.ships):
+                    print(f"{i + 1}. {ship.name}")
+                try:
+                    ship_move = int(input("Enter ship number: ")) - 1
+                    direction = input("Enter direction (up, down, left, right): ")
+                    result = player.move(player.ships[ship_move], direction)
+                    print(result)
+                except:
+                    print("Not a valid ship selection.")
+            else:
+                print("Not enough command points for Move action.")
+        elif select == '4':
+            points_used = command_points("special_attack", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                result = player.special_attack(cpu)
+                print(result)
+            else:
+                print("Not enough command points for special attack action.")
+        elif select == '5':
+            points_used = command_points("scan", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                scanning(cpu, cpu.grid)
+            else:
+                print("Not enough command points for Scan action.")
+        else: 
+            print("Invalid number selection. Must be between 1-5.")
+            
+        if all(ship.sunkeness() for ship in cpu.ships):
+            print(f"{player.name} wins!")
+            break
+        
+        print("CPU's turn.")
+        input("Press Enter to continue...")
+        result = cpu.cpu_attack(player)
+        print(result)
+        
+        if all(ship.sunkeness() for ship in player.ships):
+            print("CPU wins!")
+            break
+    print("Game Over!!!")
+                
     # gotta implement actual game loop func, but itll be called like this
