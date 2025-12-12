@@ -1,6 +1,5 @@
 """     
     - NOTES -
-from paulina to lauren - i think u need boundary checks prolly
 
 general: 
     1. we need to finish the game loop so its functional
@@ -11,20 +10,19 @@ most important thing for now is to make at least working demo - tweaks can be ma
 # TODO:
 defend - lauren
 hidden cpu grid (prints hits and misses only) (in game loop) - michael
-cpu attack - paulina
 finish game loop/main menu (add main menu and messages for the user) - 
-print_player_grid (in game loop) - 
-if name = main - 
+print_player_grid (in game loop) -  michael
 
+will remove later test tes test bfvtfhdt dhsrgbrb
 """
 
-
 import random
+import os
 
 grid_size = 10
 
-def valid_bounds(row, col, size):
-    return 0 <= row < size , 0<= col < size
+def valid_bounds(row, col, size=grid_size):
+    return (0 <= row < size) and (0<= col < size)
 
 def empty_grid(size):
     grid = []
@@ -32,24 +30,52 @@ def empty_grid(size):
         grid.append([0]*size)
     return grid
 
+def print_hidden_grid(grid):
+    print(" 0 1 2 3 4 5 6 7 8 9")
+    for i in range(10):
+        print(f"{i} ", end="")
+        for j in grid[i]:
+            if j == 2:
+                print("X ", end="") 
+            elif j == -1:
+                print("O ", end="")  
+            else:
+                print("W ", end="")  
+        print()
+        
+def print_player_grid(grid):
+    print(" 0 1 2 3 4 5 6 7 8 9")
+    for i in range(10):
+        print(f"{i} ", end="")
+        for j in grid[i]:
+            if j == 1:
+                print("S ", end="")  
+            elif j == 2:
+                print("X ", end="") 
+            elif j == -1:
+                print("O ", end="")  
+            else:
+                print("W ", end="")  
+        print()
 #Sahith's code (Ship Location)
 
 
 def ship_location(grid):
-    cells = []
+    empty_areas = []
     rows = len(grid)
     columns = len(grid[0])
     
     for row in range(len(grid)):
         for col in range(columns):
             if grid[row][col] == 0:
-                cells.append((row, col))
+                empty_areas.append((row, col))
                 
-    if cells:
-        row, col = random.choice(cells)
+    if len(empty_areas)>0:
+        row, col = random.choice(empty_areas)
         grid[row][col] = 1
-            
-    return grid, (row, col)
+        return grid, (row, col)
+    elif len(empty_areas) == 0:
+        return grid, None
          
 
 def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
@@ -60,7 +86,7 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
         direction = random.choice(['horizontal', 'vertical'])
         if direction == 'horizontal':
             row = random.randint(0, size-1)
-            col = random.randint(0, ship_size-1)
+            col = random.randint(0, size - ship_size)
             positions = [(row, col+i) for i in range(ship_size)]
         else:
             row = random.randint(0, size-ship_size)
@@ -102,9 +128,11 @@ class Player:
         self.grid = [[0]*grid_size for _ in range(grid_size)]
         self.ships = []
         self.previous_attacks = set()
-        self.defend = False
+        self.is_defending = False
+        self.defended_cell = None
+        self.command_points = 20
 
-    def assign_ships(self, num_single = 3, num_multi = 2): # assigns different types of ships, can be edited later
+    def assign_ships(self, num_single = 2, num_multi = 3): # assigns different types of ships, can be edited later
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
@@ -117,109 +145,56 @@ class Player:
             ship = Ship(f"Multi ship {i+1}", positions)
             self.ships.append(ship)
 
-
-#Sahith's code (Ship Location + valid bounds + special attack)
-
-
-def ship_location(grid):
-    empty_areas = []
-    rows = len(grid)
-    columns = len(grid[0])
-    
-    for row in range(len(grid)):
-        for col in range(columns):
-            if grid[row][col] == 0:
-                empty_areas.append((row, col))
-                
-    if len(empty_areas)>0:
-        row, col = random.choice(empty_areas)
-        grid[row][col] = 1
-        return grid, (row, col)
-    elif len(empty_areas) == 0:
-        return grid, None
-         
-def empty_grid(size):
-    grid = []
-    for _ in range(size):
-        grid.append([0]*size)
-    return grid
-
-# edit 2
-def valid_bounds(row, col, size=grid_size):
-    return (0 <= row < size) and (0<= col < size)
-    
-def special_attack(player, enemy_grid):
-    if player.special_attack_used:
-        return f'The special attack has already been used, {player.name}'
-    row_input = input("Enter your center row")
-    col_input = input("Enter your center column")
-    
-    try:
-        r = int(row_input)
-        c = int(col_input)
-    except ValueError:
-        return "Invalid input"
-    if not valid_bounds(r, c):
-        return f' The coordinates ({r}, {c}) are out of range'
-    
-    hits = 0
-    r_offset = [-1, 0, 1]
-    c_offset = [-1, 0, 1]
-    for rs in r_offset:
-        for cs in c_offset:
-            result_row = r+rs
-            result_col = c+cs
+    def special_attack(self, opponent):
+        if self.special_attack_used:
+            return f'The special attack has already been used, {self.name}'
+        row_input = input("Enter your center row")
+        col_input = input("Enter your center column")
             
-            if not valid_bounds(result_row, result_col, grid_size):
-                continue
-            
-            current_val = enemy_grid[result_row][result_col]
-            if current_val ==-1 or current_val == 2:
-                continue
-            elif current_val == 1:
-                enemy_grid[result_row][result_col] = 2
-                hits = hits + 1
-            else:
-                enemy_grid[result_row][result_col] = -1
-            
-    player.special_attack_used = True
-    return f' The player {player.name} used special attack, scoring {hits} hits'
-
-            
-        
-                
-                
-                
-            
-            
-            
-            
-    
-            
-                
-    
-
-
-    
-
-
-#Testing Function
-
-    def special_attack():
-        if player.special_attack_used:
-            return f'The special attack has already been used, {player.name}'
-        row_input = input("Enter the center row for your special attack: ")
-        col_input = input("Enter your center column for your special attack: ")
-        
         try:
-            r = int(row_input)
-            c = int(col_input)
+                r = int(row_input)
+                c = int(col_input)
         except ValueError:
-            return "Invalid input"
-        if not valid_bounds(r, c, grid_size):
-            return 'These coordinates are out of range!'
-        
+                return "Invalid input"
+        if not valid_bounds(r, c):
+                return f' The coordinates ({r}, {c}) are out of range'
+            
         hits = 0
+        r_offset = [-1, 0, 1]
+        c_offset = [-1, 0, 1]
+        for rs in r_offset:
+                for cs in c_offset:
+                    result_row = r+rs
+                    result_col = c+cs
+                    
+                    if not valid_bounds(result_row, result_col, grid_size):
+                        continue
+                    
+                    current_val = opponent.grid[result_row][result_col]
+                    if current_val ==-1 or current_val == 2:
+                        continue
+                    elif current_val == 1:
+                        opponent.grid[result_row][result_col] = 2
+                        hits = hits + 1
+                    else:
+                        opponent.grid[result_row][result_col] = -1
+                    
+        self.special_attack_used = True
+        return f' The player {self.name} used special attack, scoring {hits} hits'
+        
+    def defend(self,grid):
+        row=0
+        col=0
+        while(self.grid[row][col]!=1):
+            row=int(input("what row is the cell you are defending?"))
+            col=int(input("what column is the center of the area you are checking?")) 
+            if(self.grid[row][col]!=1): 
+                print("There's no ship there. Please select another cell")
+                continue
+            break
+        self.is_defending=True
+        self.defended_cell=(row,col)
+        return self.grid
 
 # Paulina's function - attack mechanism
 
@@ -283,6 +258,11 @@ def special_attack(player, enemy_grid):
 
             self.previous_attacks.add((row, col))
 
+            if opponent.is_defending and (row, col) == opponent.defended_cell:
+                opponent.is_defending = False
+                opponent.defended_cell = None
+                return f"CPU attacked ({row, col}) but it was defended!"
+
             cell = opponent.grid[row][col]
 
             if cell == 1:
@@ -299,7 +279,7 @@ def special_attack(player, enemy_grid):
                     opponent.grid[row][col] = -1
                     return f"CPU missed at ({row, col})!"
     #Movement Function 
-    def move(player, ship, direction):
+    def move(self, ship, direction):
     #directions 
         new_positions = []
         for (rows, cols) in ship.positions:
@@ -321,17 +301,17 @@ def special_attack(player, enemy_grid):
             if row < 0 or row >= grid_size or col < 0 or col >= grid_size:
                 return "Out of Bounds"
 
-            cell = player.grid[row][col]
+            cell = self.grid[row][col]
             if cell != 0 and (row, col) not in ship.positions:
                 return "Cannot move"
             
             new_positions.append((row, col))
         
         for (row, col) in ship.positions:
-            player.grid[row][col] = 0
+            self.grid[row][col] = 0
         
         for (row, col) in new_positions:
-            player.grid[row][col] = 1
+            self.grid[row][col] = 1
         
         ship.positions = set(new_positions)
         return "Move successful"       
@@ -357,51 +337,154 @@ def command_points(action, points):
     Returns:
         points_updated (int): updated command point total
     """
-    for correct in cost_of_action.keys():
-        if action.lower() == correct:
-            break
-    lower = action.lower()
-    costs = cost_of_action.get(lower, 0)
-    points_updated = max(0, points - costs)
-    return points_updated
-
+    action = action.lower()
+    costs = cost_of_action.get(action, 0)
+    if points >= costs:
+        return points - costs
+    else:
+        return None
 
 
 #Lauren 
-def Scanning(grid,row, col,attack, ran):            
-    """A scanning algorithm will be used to help provide information on ship locations.
-      The algorithm will be able to check its position nearby and predict if ships 
-      are located around. The function will scan the coordinate of its position and opposing ships.
-        It will try to check for ships within a specific range and return a value based on 
-        if the ship is close by or not. 
-Inputs: scanning of position and the enemy ship coordinates ( both tuples ) 
-Output: would be a boolean value to decide whether or not the ship is actually in proximity  
-ran=range
-""" 
-    if attack == grid[row][col]:
-        return True 
-    elif grid[row+ran][col] == 1:
-        return True
-    elif grid[row-ran][col]== 1: 
-        return True
-    elif grid[row][col+ran] == 1:
-        return True 
-    elif grid[row][col-ran] == 1:
-        return True
+def scanning(player,grid):            
+#     A scanning algorithm will be used to help provide information on ship locations.
+#       The algorithm will be able to check its position nearby and predict if ships 
+#       are located around. The function will scan the coordinate of its position and opposing ships.
+#         It will try to check for ships within a specific range and return a value based on 
+#         if the ship is close by or not. 
+# Inputs: scanning of position and the enemy ship coordinates ( both tuples ) 
+# Output: would be a boolean value to decide whether or not the ship is actually in proximity  
+
+    row=int((input("what row is the center of the area you are checking?")))
+    col=int((input("what column is the center of the area you are checking?")))
+    dir=(input("Please type 'd' for checking in one space diaginally and 'v' for checking in one space up and down along with left and right"))
+
+    if dir=='d': 
+        if grid[row][col]==1:
+            print("there is a ship in this area")
+            return True 
+        elif grid[row+1][col]==1 or grid[row-1][col]==1 or grid[row][col+1]==1 or grid[row][col-1]==1:
+            print("there is a ship in this area")
+            return True 
+        else: 
+            print("there is no ship in this area")
+            return False
+    elif dir=='v':
+        if grid[row][col]==1:
+            print("there is a ship in this area")
+            return True  
+        elif grid[row+1][col+1]==1 or grid[row+1][col-1]==1 or grid[row-1][col-1]==1 or grid[row-1][col+1]==1:
+            print("there is a ship in this area")
+            return True 
+        else: 
+            print("there is no ship in this area")
+            return False
     else: 
-        return False
+        print("The wrong button was pressed")
+        
+   
+
     
 
-# game loop - paulina
-
-player_name = input("Please enter your name: ")
-player = Player(player_name)
-
-cpu = Player("CPU")
-
-player.assign_ships()
-cpu.assign_ships()
+# game loop 
 
 
 
-# need to add more
+
+# main func - paulina
+if __name__ == "__main__":
+    print("Welcome to Battleship Rumble!")
+    player_name = input("Please enter your name: ")
+    player = Player(player_name)
+
+    cpu = Player("CPU")
+    print("Placing ships...")
+    player.assign_ships()
+    cpu.assign_ships()
+    print("Ships placed. Let the battle begin!")
+
+    while True: 
+        os.system('cls')
+        
+        print(f"{player.name}'s turn.")
+        print()
+        
+        print("CPU's grid:")
+        print_hidden_grid(cpu.grid)
+        
+        print(f"\n{player.name}'s grid:")
+        print_player_grid(player.grid)
+        
+        print(f"\nCommand Points: {player.command_points}")
+        print("1. Attack (3 pts)")
+        print("2. Defend (2 pts)")
+        print("3. Move (1 pt)")
+        print("4. Special Attack (5 pts)")
+        print("5. Scan (2 pts)")
+        
+        select = input("Choose your action (1-5): ")
+        if select == '1':
+            points_used = command_points("attack", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                result = player.attack(cpu)
+                print(result)
+            else:
+                print("Not enough command points for Attack.")
+        elif select == '2':
+            points_used = command_points("defend", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                player.defend(player.grid)
+                print("Defend action executed.")
+            else:
+                print("Not enough command points for Defend.")
+        elif select == '3':
+            points_used = command_points("move", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                print("Select a ship to move:")
+                for i, ship in enumerate(player.ships):
+                    print(f"{i + 1}. {ship.name}")
+                try:
+                    ship_move = int(input("Enter ship number: ")) - 1
+                    direction = input("Enter direction (up, down, left, right): ")
+                    result = player.move(player.ships[ship_move], direction)
+                    print(result)
+                except:
+                    print("Not a valid ship selection.")
+            else:
+                print("Not enough command points for Move action.")
+        elif select == '4':
+            points_used = command_points("special_attack", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                result = player.special_attack(cpu)
+                print(result)
+            else:
+                print("Not enough command points for special attack action.")
+        elif select == '5':
+            points_used = command_points("scan", player.command_points)
+            if points_used is not None:
+                player.command_points = points_used
+                scanning(player, cpu.grid)
+            else:
+                print("Not enough command points for Scan action.")
+        else: 
+            print("Invalid number selection. Must be between 1-5.")
+            
+        if all(ship.sunkeness() for ship in cpu.ships):
+            print(f"{player.name} wins!")
+            break
+        
+        print("CPU's turn.")
+        input("Press Enter to continue...")
+        result = cpu.cpu_attack(player)
+        print(result)
+        
+        if all(ship.sunkeness() for ship in player.ships):
+            print("CPU wins!")
+            break
+    print("Game Over!!!")
+                
+
