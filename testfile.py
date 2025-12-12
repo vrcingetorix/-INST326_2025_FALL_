@@ -1,6 +1,8 @@
 """     
     - NOTES -
-from paulina to lauren - i think u need boundary checks prolly
+from paulina to lauren - i think u need boundary checks prolly for scanning
+and for defend you need self.grid instead of player.grid
+from paulina to sahith - valid bounds needs to be separated by "and"
 
 general: 
     1. we need to finish the game loop so its functional
@@ -22,7 +24,7 @@ will remove later test tes test
 
 import random
 
-grid_size = 11
+grid_size = 10
 
 def valid_bounds(row, col, size):
     return 0 <= row < size , 0<= col < size
