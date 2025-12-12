@@ -129,7 +129,18 @@ class Player:
         if not valid_bounds(r, c, grid_size):
             return 'These coordinates are out of range!'
         
-        hits = 0
+        hits = 0 
+    
+    def defend(self,grid):
+        row=0
+        col=0
+        while(self.grid[row][col]!=1):
+            row=int((input("what row is the cell you are defending?")))
+            col=int((input("what column is the center of the area you are checking?"))) 
+            if(self.grid[row][col]!=1): 
+                print("There's no ship there. Please select another cell")
+        self.grid[row][col]=2 
+        return self.grid
 
 # Paulina's function - attack mechanism
 
@@ -315,16 +326,7 @@ def scanning(player,grid):
         print("The wrong button was pressed")
         
    
-def defend(player,grid):
-    row=0
-    col=0
-    while(player.grid[row][col]!=1):
-        row=int((input("what row is the cell you are defending?")))
-        col=int((input("what column is the center of the area you are checking?"))) 
-        if(player.grid[row][col]!=1): 
-            print("There's no ship there. Please select another cell")
-    player.grid[row][col]=2 
-    return player.grid
+
     
 
 # game loop 
