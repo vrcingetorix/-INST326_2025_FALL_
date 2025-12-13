@@ -59,10 +59,6 @@ To win, sink the CPU's entire fleet.
 
     Philip F. (2021, October 2). Strategies in battleship. Board & Card Games Stack Exchange. https://boardgames.stackexchange.com/questions/56427/strategies-in-battleshipsome inspiration we used to determine how to go about making our game and what rules/strategies to implement
 
-
-
-‌   
-
 ### Attributes Table
 
 | Function / Method            | Primary Author        | Techniques Demonstrated |
