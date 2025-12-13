@@ -28,7 +28,7 @@ def valid_bounds(row, col, size=grid_size):
 def empty_grid(size):
     '''
     author - Sahith Gandham
-    technique - using nested lists
+    technique - using nested lists, append method
     
     Initializes a square grid with zeros in each cell, indicating empty positions
     
@@ -98,8 +98,7 @@ def print_player_grid(grid):
 def ship_location(grid):
     '''
     author - Sahith Gandham
-    technique - random placement algorithm; uses random module and conditional
-    logic
+    technique - sequence unpacking, module usage (random module), if-elif statements
     
     This function places the ship in any single cell on the grid; it analyzes the
     grid and sees whether empty cells, which are cells with a value of 0, exists. If
@@ -294,7 +293,9 @@ class Player:
     def special_attack(self, opponent):
         '''
         author = Sahith Gandham
-        techniques - nested loops, complex conditional logic, try and except block
+        techniques - Area of effect algorithm, where I had to find out multiple
+        targets in a specific area and attacks those specific areas with a 3x3 grid
+        (representing a blast radius). I also used an f-string
         
         This function runs a 3x3 grid attack (emulating a blast radius) according
         to the coordinates that the user enters. 
