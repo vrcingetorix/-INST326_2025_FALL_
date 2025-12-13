@@ -1,1 +1,29 @@
 # -INST326_2025_FALL_
+
+# TODO: 
+
+Your documentation should include
+
+    - An explanation of the purpose of each file in your repository.
+
+    - Clear instructions on how to run your program from the command line. You do not need to explain how to run the program on Windows and on MacOS; just pick one. If your program takes command-line arguments, please document the command-line interface (which arguments are required? which are optional, if any? what data types are you looking for? are there a specific format for data files? etc.)
+
+    - Clear instructions on how to use your program and/or interpret the output of the program. Anything the user might encounter while using your program that a random person on the street would not find self-explanatory needs to be explained in your instructions.
+
+    - An annotated bibliography of all sources you used to develop your project, including sources of data, sources of background information about your project topic, and sources about Python programming that informed specific aspects of your code. For each source, explain how you used the source. You do not need to cite any INST 326 course materials.
+
+    - Attribution: in order to evaluate whether each member has made a substantial, original contribution to the project, please provide a table like the one below, with a separate row for each method or function.
+
+In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
+
+    - Please make sure your table meets the following specifications:
+
+    - Do not list classes or other units of code in the table, only functions and methods.
+
+    - Only one function or method per row.
+
+    - Only one primary author per function or method.
+
+    - Please list as many techniques in a given row as you are claiming credit for in that function or method (for example, method foo might have two techniques, while method bar has zero; that's totally fine).
+
+    - A given technique should only appear once in the table.

@@ -140,7 +140,7 @@ def ship_location(grid):
         return grid, None
          
 
-def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships
+def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships - paulina
     size = len(grid)
     placed = False
 
@@ -169,14 +169,14 @@ class Ship:
         self.positions = set(positions)
         self.hits = set()
     
-    def record_hit(self, coord):
+    def record_hit(self, coord): # - paulina
         if coord in self.positions:
             self.hits.add(coord)
 
-    def sunkeness(self):
+    def sunkeness(self): # paulina
         return self.hits == self.positions
     
-    def __repr__(self):
+    def __repr__(self): # paulina
         return f"{self.name} is at {self.positions}"
     
     
@@ -184,7 +184,7 @@ class Ship:
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name): 
         self.name = name
         self.special_attack_used = False
         self.grid = [[0]*grid_size for _ in range(grid_size)]
@@ -194,7 +194,7 @@ class Player:
         self.defended_cell = None
         self.command_points = 20
 
-    def assign_ships(self, num_single = 2, num_multi = 3): # assigns different types of ships, can be edited later
+    def assign_ships(self, num_single = 2, num_multi = 3): # paulina
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
@@ -261,7 +261,7 @@ class Player:
         self.special_attack_used = True
         return f' The player {self.name} used special attack, scoring {hits} hits'
         
-    def defend(self,grid):
+    def defend(self,grid): # lauren
         row=0
         col=0
         while(self.grid[row][col]!=1):
@@ -327,7 +327,7 @@ class Player:
             opponent.grid[row][col] = -1
             return f"Miss at ({row, col})" # marks as a miss
         
-    def cpu_attack(self, opponent):
+    def cpu_attack(self, opponent): # paulina
             while True:
                 row = random.randint(0, grid_size-1)
                 col = random.randint(0, grid_size-1)
@@ -357,7 +357,7 @@ class Player:
             else:
                 opponent.grid[row][col] = -1
                 return f"CPU missed at ({row, col})!"
-    #Movement Function 
+    #Movement Function - michael
     def move(self, ship, direction):
         """
         author - Michael Nnamoko
@@ -479,12 +479,12 @@ def scanning(player,grid):
 
     
 
-# game loop 
+# game loop - michael
 
 
 
 
-# main func - paulina
+
 if __name__ == "__main__":
     print("Welcome to Battleship Rumble!")
     player_name = input("Please enter your name: ")
