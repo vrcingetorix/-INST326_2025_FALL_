@@ -429,23 +429,35 @@ class Player:
             return f"Miss at ({row, col})" # marks as a miss
         
     def cpu_attack(self, opponent): # paulina
-            while True:
+        """
+        Allows CPU to attack human opponent's grid randomly.
+
+        Args:
+            opponent (Player): the player object being attacked
+
+        Returns:
+            str: message indicating hit, miss, or sunk ship
+
+        Author: Paulina Strunnikova
+        
+        """
+        while True:
                 row = random.randint(0, grid_size-1)
                 col = random.randint(0, grid_size-1)
 
                 if (row, col) not in self.previous_attacks:
                     break
 
-            self.previous_attacks.add((row, col))
+        self.previous_attacks.add((row, col))
 
-            if opponent.is_defending and (row, col) == opponent.defended_cell:
+        if opponent.is_defending and (row, col) == opponent.defended_cell:
                 opponent.is_defending = False
                 opponent.defended_cell = None
                 return f"CPU attacked ({row, col}) but it was defended!"
 
-            cell = opponent.grid[row][col]
+        cell = opponent.grid[row][col]
 
-            if cell == 1:
+        if cell == 1:
                 opponent.grid[row][col] = 2
                 
                 for ship in opponent.ships:
@@ -455,7 +467,7 @@ class Player:
                             return f"CPU sunk {ship.name}"
                             
                 return f"CPU hit {self.name}'s ship at ({row, col})."
-            else:
+        else:
                 opponent.grid[row][col] = -1
                 return f"CPU missed at ({row, col})!"
     #Movement Function - michael
