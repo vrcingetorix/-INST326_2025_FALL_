@@ -124,11 +124,11 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
     Places ships of given size and random orientation on the grid.
 
     Args:
-        grid (list): 
-        ship_size (int): _description_
+        grid (list): game grid represented as a 2D list
+        ship_size (int): random choice of a number between 2 through 5 from a list
 
     Returns:
-        positions (tuple): _description_
+        positions (tuple): coordinates of placed ship
     
     Author: Paulina Strunnikova
 
@@ -161,14 +161,26 @@ class Ship:
         Initializes a Ship object with a name and positions, and sets hits to an empty set.
 
         Args:
-            name (_type_): _description_
-            positions (_type_): _description_
+            name (str): name of the ship
+            positions (set of tuples): coordiinates of the ship
+
+        Author: Paulina Strunnikova
+
         """
         self.name = name
         self.positions = set(positions)
         self.hits = set()
     
     def record_hit(self, coord): # - paulina
+        """
+        Records hits on ships by adding given coordinates to hits set.
+
+        Args:
+            coord (tuple): _description_
+
+        Author: Paulina Strunnikova
+
+        """
         if coord in self.positions:
             self.hits.add(coord)
 
