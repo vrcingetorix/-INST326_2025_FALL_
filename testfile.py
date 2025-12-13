@@ -120,6 +120,19 @@ def ship_location(grid):
          
 
 def place_ships(grid, ship_size): # basically like ship_location but for multi-cell ships - paulina
+    """
+    Places ships of given size and random orientation on the grid.
+
+    Args:
+        grid (list): 
+        ship_size (int): _description_
+
+    Returns:
+        positions (tuple): _description_
+    
+    Author: Paulina Strunnikova
+
+    """
     size = len(grid)
     placed = False
 
@@ -144,6 +157,13 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
 # ship class - paulina
 class Ship:
     def __init__(self, name, positions):
+        """
+        Initializes a Ship object with a name and positions, and sets hits to an empty set.
+
+        Args:
+            name (_type_): _description_
+            positions (_type_): _description_
+        """
         self.name = name
         self.positions = set(positions)
         self.hits = set()
