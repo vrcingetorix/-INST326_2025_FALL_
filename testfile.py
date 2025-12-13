@@ -197,7 +197,7 @@ class Ship:
         Records hits on ships by adding given coordinates to hits set.
 
         Args:
-            coord (tuple): _description_
+            coord (tuple): values of the row and column of the hit as a tuple
 
         Author: Paulina Strunnikova
 
