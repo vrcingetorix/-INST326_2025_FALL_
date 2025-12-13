@@ -9,6 +9,9 @@ grid_size = 10
 
 def valid_bounds(row, col, size=grid_size):
     '''
+    author - Sahith Gandham
+    technique - conditional statements
+    
     The function checks whether a specific coordinate is in the bounds of the grid
     
     Parameters:
@@ -24,16 +27,17 @@ def valid_bounds(row, col, size=grid_size):
 
 def empty_grid(size):
     '''
+    author - Sahith Gandham
+    technique - using nested lists
+    
     Initializes a square grid with zeros in each cell, indicating empty positions
     
     Parameters:
         size (int): width and height of the grid
         
-        
     Returns:
         list[list[int]]: It returns a 2d list where each element is 0
     '''
-    
     grid = []
     for _ in range(size):
         grid.append([0]*size)
@@ -93,6 +97,10 @@ def print_player_grid(grid):
 
 def ship_location(grid):
     '''
+    author - Sahith Gandham
+    technique - random placement algorithm; uses random module and conditional
+    logic
+    
     This function places the ship in any single cell on the grid; it analyzes the
     grid and sees whether empty cells, which are cells with a value of 0, exists. If
     this is the case, then the empty cell's value changes from 0 to 1, meaning that it
@@ -285,6 +293,9 @@ class Player:
     
     def special_attack(self, opponent):
         '''
+        author = Sahith Gandham
+        techniques - nested loops, complex conditional logic, try and except block
+        
         This function runs a 3x3 grid attack (emulating a blast radius) according
         to the coordinates that the user enters. 
         
@@ -297,8 +308,6 @@ class Player:
             
             *Special attack attacks 9 cells in total as it is a 3x3 grid
         '''
-        
-        
         if self.special_attack_used:
             return f'The special attack has already been used, {self.name}'
         row_input = input("Enter your center row")
