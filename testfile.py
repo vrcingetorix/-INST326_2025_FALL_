@@ -58,6 +58,16 @@ def empty_grid(size):
     return grid
 
 def print_hidden_grid(grid):
+    """
+    author -  Michael Nnamoko
+    technique - string containing expressions 
+    Shows the CPU's grid with hits and misses only.
+    Parameters:
+        grid: The CPU's grid to be displayed
+    
+    Returns:
+        None: Prints the grid to the output
+    """
     print(" 0 1 2 3 4 5 6 7 8 9")
     for i in range(10):
         print(f"{i} ", end="")
@@ -71,6 +81,17 @@ def print_hidden_grid(grid):
         print()
         
 def print_player_grid(grid):
+    """
+    author -  Michael Nnamoko
+    technique -  conditional expressions 
+    Shows the player grid with ships, hits, and misses.
+    
+    Parameters:
+        grid: The player's grid to be displayed
+        
+    Returns:
+        None: Prints the grid to the output
+    """
     print(" 0 1 2 3 4 5 6 7 8 9")
     for i in range(10):
         print(f"{i} ", end="")
@@ -370,6 +391,18 @@ class Player:
                 return f"CPU missed at ({row, col})!"
     #Movement Function - michael
     def move(self, ship, direction):
+        """
+        author - Michael Nnamoko
+        technique - sequence unpacking, set operations
+        Moves a ship into a specific direction.
+        
+        Parameters:
+            ship: The ship object to be moved
+            direction: The direction to move the ship ("up", "down", "left", "right")
+            
+        Returns:
+            str: A message indicating success or failure of the move
+        """
     #directions 
         new_positions = []
         for (rows, cols) in ship.positions:
@@ -418,6 +451,8 @@ cost_of_action =  {
 }
 def command_points(action, points):
     """
+    author - Michael Nnamoko
+    technique - optional parameters and/or keyword arguments
     Used to update the command point total according to the user's action
     
     Parameters: 
