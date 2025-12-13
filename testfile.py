@@ -218,6 +218,15 @@ class Ship:
         return self.hits == self.positions
     
     def __repr__(self): # paulina
+        """
+        Provides string representation of the Ship object.
+
+        Returns:
+            str: F-string showing ship name an positions
+
+        Author: Paulina Strunnikova
+
+        """
         return f"{self.name} is at {self.positions}"
     
     
@@ -225,7 +234,32 @@ class Ship:
 # player class - paulina (trying to make it so you can only use a special attack once per game)
 
 class Player:
-    def __init__(self, name): 
+    """
+    A class to represent a player in Battleship Rumble.
+
+    Attributes:
+        name (str): name of the player
+        special_attack_used (bool): checks for special attack usage
+        grid (list): game grid
+        ships (list): list of ship objects
+        previous_attacks (set): set of previous attack coords
+        is_defending (bool): defense status
+        defended_cell (tuple): coords of defended cell
+        command_points (int): available comman points
+
+    """
+    def __init__(self, name):
+        """
+        Initializes a Player object with a name and sets up attirbutes for 
+        special_attack, grid, ships, previous_attacks, defending status,
+        defended_cell, and command points.
+
+        Args:
+            name (str): name of the player
+
+        Author: Paulina Strunnikova
+
+        """
         self.name = name
         self.special_attack_used = False
         self.grid = [[0]*grid_size for _ in range(grid_size)]
@@ -236,6 +270,16 @@ class Player:
         self.command_points = 20
 
     def assign_ships(self, num_single = 2, num_multi = 3): # paulina
+        """
+        Assigns ships to the player, single and multi-cell ships. Total 5 ships.
+
+        Args:
+            num_single (int): number of single cell ships
+            num_multi (int): number of multi cell ships
+
+        Author: Paulina Strunnikova
+
+        """
         for i in range(num_single):
             self.grid, pos = ship_location(self.grid) # single cell ship
             if pos: 
@@ -318,13 +362,28 @@ class Player:
 
 # Paulina's function - attack mechanism
 
-# Attack Mechanism - The game must take input from the player as a guess to where to attack the opponent. The input is in the
-# form of a coordinatoes for a cell, which is the the number of the row and column as two integers. The
-# function returns a string indicating whether the player hit a ship or not and then marks the cell as being attacked already.
+# Attack Mechanism - The game must take input from the player as a guess to 
+# where to attack the opponent. The input is in the
+# form of a coordinatoes for a cell, which is the the number of the row and 
+# column as two integers. The
+# function returns a string indicating whether the player hit a ship or not and 
+# then marks the cell as being attacked already.
 # ○ Inputs: desired coordinates for attack
 # ○ Outputs: would be a string value of either attack or miss
 
     def attack(self, opponent):
+        """
+        Allows player to attack opponent's grid by entering coords.
+
+        Args:
+            opponent (Player): the player object being attacked
+
+        Returns:
+            str: message indicating hit, miss, or sunk ship
+
+        Author: Paulina Strunnikova
+
+        """
         
         while True:
             try:
@@ -344,7 +403,8 @@ class Player:
             previous_attacks = (cell == 2) or (cell == -1)
 
             if (row, col) in self.previous_attacks:
-                print("This position has already been attacked!") # prevents duplicate attacks 
+                print("This position has already been attacked!") # prevents 
+                # duplicate attacks 
                 continue
             
             break
