@@ -61,15 +61,15 @@ To win, sink the CPU's entire fleet.
 | Function / Method            | Primary Author        | Techniques Demonstrated |
 |------------------------------|------------------------|---------------------------|
 | print_hidden_grid          | Michael     | f-strings containing expressions |
-| print_player_grid          | Michael     | conditional expressions |
-| move                       | Michael     | sequence unpacking; set operations (difference/update) |
-| command_points             | Michael     | optional parameters and/or keyword arguments |
+| move                       | Michael     | set operations |
 | place_ships                | Paulina     | comprehensions or generator expressions |
 | Ship __repr__              | Paulina     | magic methods other than `__init__` |
-| Ship and Player            | Paulina     | composition of two custom classes |
-| valid_bounds               | Sahith      | |
-| special_attack             | Sahith      | |
+| player.assign_ships        | Paulina     | composition of two custom classes |
+| valid_bounds               | Sahith      | conditional expressions |
+| ship_location              | Sahith      | sequence unpacking |
 | defend                     | Lauren      | |
-| scanning                   | Lauren      | |
+| scanning                   | Lauren      | optional parameters and/or keyword arguments |
+
+
 
 
