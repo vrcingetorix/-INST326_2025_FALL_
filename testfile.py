@@ -1,21 +1,3 @@
-"""     
-    - NOTES -
-
-general: 
-    1. we need to finish the game loop so its functional
-    2. need special attack and move functions (can only use each once per game)
-    3. incorporate command points system in game loop
-most important thing for now is to make at least working demo - tweaks can be made later
-
-# TODO:
-defend - lauren
-hidden cpu grid (prints hits and misses only) (in game loop) - michael
-finish game loop/main menu (add main menu and messages for the user) - 
-print_player_grid (in game loop) -  michael
-
-will remove later test tes test bfvtfhdt dhsrgbrb
-"""
-
 import random
 import os
 
