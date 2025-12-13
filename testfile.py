@@ -345,6 +345,18 @@ class Player:
         return f' The player {self.name} used special attack, scoring {hits} hits'
         
     def defend(self,grid): # lauren
+        """
+        Allows player to defend a cell containing their ship for a turn.
+
+        Args:
+            grid (list): the player's grid
+
+        Returns:
+            list: updated grid with defense status
+        
+        Author: Lauren Pierre-Louis
+        
+        """
         row=0
         col=0
         while(self.grid[row][col]!=1):
@@ -550,7 +562,20 @@ def command_points(action, points):
 
 
 #Lauren 
-def scanning(player,grid):            
+def scanning(player,grid):
+    """
+    A function to scan for nearby ships on the grid.
+
+    Args:
+        player (Player): the player performing the scan
+        grid (list): the opponent's grid to be scanned
+    
+    Returns:
+        bool: True if a ship is detected nearby, otherwise False
+
+    Author: Lauren Pierre-Louis
+    
+    """       
 #     A scanning algorithm will be used to help provide information on ship locations.
 #       The algorithm will be able to check its position nearby and predict if ships 
 #       are located around. The function will scan the coordinate of its position and opposing ships.
