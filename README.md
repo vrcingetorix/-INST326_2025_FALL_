@@ -27,7 +27,7 @@
 
 ‌   
 
-### Attrition Table
+### Attributes Table
 
 | Function / Method            | Primary Author        | Techniques Demonstrated |
 |------------------------------|------------------------|---------------------------|
