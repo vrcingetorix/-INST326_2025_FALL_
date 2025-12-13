@@ -49,7 +49,7 @@ letting you know whether there is a ship nearby or not.
 
 To win, sink the CPU's entire fleet. 
 
-# Bibliography
+## Bibliography
     Clipart Library. (2025). Clipart-Library.com. https://clipart-library.com/2023/445-4453395_png-royalty-free-download-battleship-clipart-battleship-clipart.pngAn image of a battleship used in our presentation.
 
     Dreamstime.com. (2025). Dreamstime.com. https://thumbs.dreamstime.com/b/battleship-icon-cartoon-style-illustration-vector-web-85897705.jpgsecond image of a battleship used in our presentation
