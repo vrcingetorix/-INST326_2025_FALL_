@@ -17,7 +17,13 @@
     - Attribution: in order to evaluate whether each member has made a substantial, original contribution to the project, please provide a table like the one below, with a separate row for each method or function.
 
 ## Bibliography
-    (2025). Clipart-Library.com. https://clipart-library.com/2023/445-4453395_png-royalty-free-download-battleship-clipart-battleship-clipart.png
+    Clipart Library. (2025). Clipart-Library.com. https://clipart-library.com/2023/445-4453395_png-royalty-free-download-battleship-clipart-battleship-clipart.pngAn image of a battleship used in our presentation.
+
+    Dreamstime.com. (2025). Dreamstime.com. https://thumbs.dreamstime.com/b/battleship-icon-cartoon-style-illustration-vector-web-85897705.jpgsecond image of a battleship used in our presentation
+
+    Philip F. (2021, October 2). Strategies in battleship. Board & Card Games Stack Exchange. https://boardgames.stackexchange.com/questions/56427/strategies-in-battleshipsome inspiration we used to determine how to go about making our game and what rules/strategies to implement
+
+
 
 ‌   
 
