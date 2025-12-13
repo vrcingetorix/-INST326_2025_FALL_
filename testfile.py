@@ -177,6 +177,15 @@ def place_ships(grid, ship_size): # basically like ship_location but for multi-c
 
 # ship class - paulina
 class Ship:
+    """
+    A class to represent a ship in Battleship Rumble.
+
+    Attributes:
+        name (str): name of the ship
+        positons (set of tuples): coords of the ship
+        hits (set of tuples): coords of recorded hits
+    
+    """
     def __init__(self, name, positions):
         """
         Initializes a Ship object with a name and positions, and sets hits to an empty set.
