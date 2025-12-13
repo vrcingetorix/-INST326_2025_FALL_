@@ -5,7 +5,7 @@
 
 ### Your documentation should include
 Welcome to Battlship Rumble! This is our spin on the classic Battleship game
-with extra features to make a text-based as fun as it can be. The only files in
+with extra features to make a text-based game as fun as it can be. The only files in
 our repository are .gitignore, our license, the readme.md, and the actual file
 with the game, testfile.py.
 
