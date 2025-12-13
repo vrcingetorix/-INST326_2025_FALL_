@@ -1,8 +1,9 @@
-# -INST326_2025_FALL_
+### Battleship Rumble
+## repo: -INST326_2025_FALL_
 
-# TODO: 
+## TODO: 
 
-Your documentation should include
+# Your documentation should include
 
     - An explanation of the purpose of each file in your repository.
 
@@ -12,9 +13,15 @@ Your documentation should include
 
     - An annotated bibliography of all sources you used to develop your project, including sources of data, sources of background information about your project topic, and sources about Python programming that informed specific aspects of your code. For each source, explain how you used the source. You do not need to cite any INST 326 course materials.
 
+
     - Attribution: in order to evaluate whether each member has made a substantial, original contribution to the project, please provide a table like the one below, with a separate row for each method or function.
 
-In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
+## Bibliography
+    (2025). Clipart-Library.com. https://clipart-library.com/2023/445-4453395_png-royalty-free-download-battleship-clipart-battleship-clipart.png
+
+‌   
+
+# In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
 
     - Please make sure your table meets the following specifications:
 
