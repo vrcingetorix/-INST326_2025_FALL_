@@ -27,16 +27,20 @@
 
 ‌   
 
-### In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
+### Attrition Table
 
-    - Please make sure your table meets the following specifications:
+| Function / Method            | Primary Author        | Techniques Demonstrated |
+|------------------------------|------------------------|---------------------------|
+| print_hidden_grid          | Michael     | f-strings containing expressions |
+| print_player_grid          | Michael     | conditional expressions |
+| move                       | Michael     | sequence unpacking; set operations (difference/update) |
+| command_points             | Michael     | optional parameters and/or keyword arguments |
+| place_ships                | Paulina     | comprehensions or generator expressions |
+| Ship __repr__              | Paulina     | magic methods other than `__init__` |
+| Ship and Player            | Paulina     | composition of two custom classes |
+| valid_bounds               | Sahith      | |
+| special_attack             | Sahith      | |
+| defend                     | Lauren      | |
+| scanning                   | Lauren      | |
 
-    - Do not list classes or other units of code in the table, only functions and methods.
 
-    - Only one function or method per row.
-
-    - Only one primary author per function or method.
-
-    - Please list as many techniques in a given row as you are claiming credit for in that function or method (for example, method foo might have two techniques, while method bar has zero; that's totally fine).
-
-    - A given technique should only appear once in the table.
