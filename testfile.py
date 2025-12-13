@@ -206,6 +206,15 @@ class Ship:
             self.hits.add(coord)
 
     def sunkeness(self): # paulina
+        """
+        Checks ship's sunkeness by comparing hits to positions.
+
+        Returns:
+            set: True if all positions are equal to recorded hits
+
+        Author: Paulina Strunnikova
+
+        """
         return self.hits == self.positions
     
     def __repr__(self): # paulina
