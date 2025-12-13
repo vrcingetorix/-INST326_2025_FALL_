@@ -1,9 +1,9 @@
-### Battleship Rumble
+# Battleship Rumble
 ## repo: -INST326_2025_FALL_
 
 ## TODO: 
 
-# Your documentation should include
+### Your documentation should include
 
     - An explanation of the purpose of each file in your repository.
 
@@ -16,7 +16,7 @@
 
     - Attribution: in order to evaluate whether each member has made a substantial, original contribution to the project, please provide a table like the one below, with a separate row for each method or function.
 
-## Bibliography
+# Bibliography
     Clipart Library. (2025). Clipart-Library.com. https://clipart-library.com/2023/445-4453395_png-royalty-free-download-battleship-clipart-battleship-clipart.pngAn image of a battleship used in our presentation.
 
     Dreamstime.com. (2025). Dreamstime.com. https://thumbs.dreamstime.com/b/battleship-icon-cartoon-style-illustration-vector-web-85897705.jpgsecond image of a battleship used in our presentation
@@ -27,7 +27,7 @@
 
 ‌   
 
-# In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
+### In the table, list all methods and functions that are being claimed by any member of the group in fulfillment of item 7 above. Only list the techniques that are being claimed in fulfillment of item 7d (for example, three functions may contain f-strings, but only one member of the group can claim f-strings and they should only be listed once in the table).
 
     - Please make sure your table meets the following specifications:
 
