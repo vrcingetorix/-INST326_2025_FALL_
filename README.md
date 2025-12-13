@@ -1,9 +1,6 @@
 # Battleship Rumble
-## repo: -INST326_2025_FALL_
+### repo: -INST326_2025_FALL_
 
-## TODO: 
-
-### Your documentation should include
 Welcome to Battlship Rumble! This is our spin on the classic Battleship game
 with extra features to make a text-based game as fun as it can be. The only files in
 our repository are .gitignore, our license, the readme.md, and the actual file
@@ -59,7 +56,7 @@ To win, sink the CPU's entire fleet.
 
     Philip F. (2021, October 2). Strategies in battleship. Board & Card Games Stack Exchange. https://boardgames.stackexchange.com/questions/56427/strategies-in-battleshipsome inspiration we used to determine how to go about making our game and what rules/strategies to implement
 
-### Attributes Table
+## Attributes Table
 
 | Function / Method            | Primary Author        | Techniques Demonstrated |
 |------------------------------|------------------------|---------------------------|
